@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/main.dart';
 import 'package:new_app/veiw/components/back_ground.dart';
 import 'package:new_app/veiw/components/bttons.dart';
 import 'package:new_app/veiw/components/custom_text.dart';
@@ -57,6 +58,8 @@ class SignVeiw extends StatelessWidget {
                         txt: '1'.tr,
                         ontap: () {
                           if (_key.currentState!.validate()) {
+                            sharedpref!.setInt('id', 121212);
+                            sharedpref!.setString('company', 'company1');
                             Get.off(
                               () => HomeVeiw(
                                 admin: userCont.text,
