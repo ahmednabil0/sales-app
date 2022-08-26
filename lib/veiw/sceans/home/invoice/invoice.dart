@@ -5,10 +5,12 @@ import 'package:new_app/veiw/components/app_bar.dart';
 import 'package:new_app/veiw/components/back_ground.dart';
 import 'package:new_app/veiw/components/bttons.dart';
 import 'package:new_app/veiw/sceans/home/invoice/create_invoice.dart';
+import 'package:new_app/veiw_model/invoces/create_invoice_veiw_model.dart';
 
-class InvoiceVeiw extends StatelessWidget {
-  const InvoiceVeiw({super.key});
-
+class InvoiceVeiw extends GetWidget<InvoiceVeiwModel> {
+  InvoiceVeiw({super.key});
+  @override
+  final controller = Get.put(InvoiceVeiwModel());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +34,7 @@ class InvoiceVeiw extends StatelessWidget {
             ),
             CustomButton3(
                 ontap: () {
-                  Get.to(() => const CreateInvoice());
+                  Get.to(() => CreateInvoice());
                 },
                 txt: '17'.tr),
             SizedBox(

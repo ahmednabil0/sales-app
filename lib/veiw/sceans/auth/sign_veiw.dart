@@ -6,14 +6,16 @@ import 'package:new_app/veiw/components/bttons.dart';
 import 'package:new_app/veiw/components/custom_text.dart';
 import 'package:new_app/veiw/components/txt_frm_feilds/txt_forms.dart';
 import 'package:new_app/veiw/helper/consts/colors.dart';
-import 'package:new_app/veiw/sceans/home/home_veiw.dart';
+import 'package:new_app/veiw_model/auth/login_veiw_model.dart';
 import 'package:new_app/veiw_model/localization/local_veiw_model.dart';
 
-class SignVeiw extends StatelessWidget {
+class SignVeiw extends GetWidget<LoginVeiwModel> {
   SignVeiw({super.key});
   final TextEditingController userCont = TextEditingController();
   final TextEditingController passCont = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  @override
+  final controller = Get.put(LoginVeiwModel());
 
   @override
   Widget build(BuildContext context) {
@@ -49,21 +51,28 @@ class SignVeiw extends StatelessWidget {
                       SizedBox(
                         height: Get.width * 0.04,
                       ),
-                      TxtFrmFeild.buildpasswordTxtForm(
-                          controller: passCont, obs: true, onPressed: () {}),
+                      GetBuilder<LoginVeiwModel>(
+                        builder: (controller) =>
+                            TxtFrmFeild.buildpasswordTxtForm(
+                          controller: passCont,
+                          obs: controller.opscur,
+                          onPressed: () {
+                            controller.isops();
+                          },
+                        ),
+                      ),
                       SizedBox(
                         height: Get.width * 0.1,
                       ),
                       CustomButton(
                         txt: '1'.tr,
-                        ontap: () {
+                        ontap: () async {
                           if (_key.currentState!.validate()) {
                             sharedpref!.setInt('id', 121212);
                             sharedpref!.setString('company', 'company1');
-                            Get.off(
-                              () => HomeVeiw(
-                                admin: userCont.text,
-                              ),
+                            await controller.signIn(
+                              userCont.text,
+                              passCont.text,
                             );
                           }
                         },

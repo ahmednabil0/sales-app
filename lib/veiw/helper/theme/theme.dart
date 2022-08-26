@@ -9,7 +9,6 @@ ThemeData getThemeDate() {
         fontSize: Get.width * 0.035,
         fontWeight: FontWeight.w600,
         color: Colors.grey,
-        fontFamily: "El Messiri",
       ),
       contentPadding: EdgeInsets.symmetric(
         horizontal: Get.width * 0.04,
@@ -19,8 +18,8 @@ ThemeData getThemeDate() {
       filled: true,
       focusedBorder: OutlineInputBorder(
         borderSide: const BorderSide(
-          width: 0,
-          color: Colors.transparent,
+          width: 1.5,
+          color: AppColors.primaryColor,
         ),
         borderRadius: BorderRadius.all(
           Radius.circular(Get.width * 0.02),
@@ -28,8 +27,8 @@ ThemeData getThemeDate() {
       ),
       enabledBorder: OutlineInputBorder(
         borderSide: const BorderSide(
-          width: 0,
-          color: Colors.transparent,
+          width: 1.5,
+          color: AppColors.primaryColor,
         ),
         borderRadius: BorderRadius.all(
           Radius.circular(Get.width * 0.02),

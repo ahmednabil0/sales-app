@@ -10,7 +10,7 @@ class Homedata {
     HomeCardModel(
         type: '12'.tr,
         ontap: () {
-          Get.to(() => const InvoiceVeiw());
+          Get.to(() => InvoiceVeiw());
         },
         icon: Icons.backup_table_outlined),
     HomeCardModel(
