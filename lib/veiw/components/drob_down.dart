@@ -9,6 +9,12 @@ SizedBox buildDrobDown({required InvoiceVeiwModel controller}) {
   return SizedBox(
     width: Get.width * 0.85,
     child: DropdownSearch<String>(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '5'.tr;
+          }
+          return null;
+        },
         clearButtonProps: const ClearButtonProps(
             color: AppColors.primaryColor,
             isVisible: true,

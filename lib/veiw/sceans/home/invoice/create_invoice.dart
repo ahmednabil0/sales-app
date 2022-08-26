@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/veiw/components/app_bar.dart';
 import 'package:new_app/veiw/components/back_ground.dart';
+import 'package:new_app/veiw/components/bttons.dart';
 import 'package:new_app/veiw/components/drob_down.dart';
 import 'package:new_app/veiw/components/txt_frm_feilds/txt_forms.dart';
 import 'package:new_app/veiw_model/invoces/create_invoice_veiw_model.dart';
@@ -35,8 +36,13 @@ class CreateInvoice extends GetWidget<InvoiceVeiwModel> {
                   height: Get.width * 0.03,
                 ),
                 SizedBox(
-                    width: Get.width * 0.85,
-                    child: TxtFrmFeild.buildDateTxtForm(controller: dateCont))
+                  width: Get.width * 0.85,
+                  child: TxtFrmFeild.buildDateTxtForm(controller: dateCont),
+                ),
+                SizedBox(
+                  height: Get.width * 0.03,
+                ),
+                CustomButton4(ontap: () {}, txt: '21'.tr)
               ],
             ),
           ),

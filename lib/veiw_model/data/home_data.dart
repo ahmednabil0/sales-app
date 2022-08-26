@@ -12,14 +12,12 @@ class Homedata {
         ontap: () {
           Get.to(() => InvoiceVeiw());
         },
-        icon: Icons.backup_table_outlined),
+        icon: Icons.inventory_outlined),
+    HomeCardModel(type: '13'.tr, ontap: () {}, icon: Icons.move_to_inbox_sharp),
+    HomeCardModel(type: '14'.tr, ontap: () {}, icon: Icons.backup_outlined),
     HomeCardModel(
-        type: '13'.tr, ontap: () {}, icon: Icons.backup_table_outlined),
+        type: '15'.tr, ontap: () {}, icon: Icons.content_paste_go_outlined),
     HomeCardModel(
-        type: '14'.tr, ontap: () {}, icon: Icons.backup_table_outlined),
-    HomeCardModel(
-        type: '15'.tr, ontap: () {}, icon: Icons.backup_table_outlined),
-    HomeCardModel(
-        type: '16'.tr, ontap: () {}, icon: Icons.backup_table_outlined),
+        type: '16'.tr, ontap: () {}, icon: Icons.check_circle_outlined),
   ];
 }

@@ -75,6 +75,7 @@ class TxtFrmFeild {
           }
           return null;
         },
+        readOnly: true,
         style: const TextStyle(
             color: AppColors.primaryColor, fontWeight: FontWeight.w600),
         decoration: InputDecoration(

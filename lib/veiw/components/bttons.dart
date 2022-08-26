@@ -42,6 +42,44 @@ class CustomButton extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
+class CustomButton4 extends StatelessWidget {
+  CustomButton4({
+    required this.ontap,
+    required this.txt,
+    Key? key,
+  }) : super(key: key);
+  String txt;
+  void Function() ontap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: ontap,
+      child: Container(
+        alignment: Alignment.center,
+        width: Get.width * 0.85,
+        height: Get.width * 0.12,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            Get.width * 0.02,
+          ),
+          gradient: LinearGradient(
+              colors: [Colors.grey.shade600, Colors.grey.shade400],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight),
+        ),
+        child: AppText(
+          txt: txt,
+          size: Get.width * 0.055,
+          fw: FontWeight.bold,
+          color: AppColors.backgroundColor,
+        ),
+      ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
 class CustomButton2 extends StatelessWidget {
   CustomButton2({
     required this.color,
