@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:new_app/main.dart';
@@ -11,6 +12,7 @@ class LoginVeiwModel extends GetxController {
   }
 
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  CollectionReference userRef = FirebaseFirestore.instance.collection('users');
   Future<void> signUp(String email, String password, String name) async {
     try {
       UserCredential userCredential =
@@ -20,6 +22,21 @@ class LoginVeiwModel extends GetxController {
       );
       // ignore: unnecessary_null_comparison
       if (userCredential != null) {
+        await userRef.doc(firebaseAuth.currentUser!.uid).set({
+          'id': firebaseAuth.currentUser!.uid,
+          'name': 'احمد نبيل السيد',
+          'email': email,
+          'password': password,
+          'lat': 0.0,
+          'long': 0.0,
+          'companyName': 'company1',
+          'companyId': 125654554,
+          'personalSales': 1500.00,
+          'isActive': false,
+          'phone': '+20 01065028467',
+          'permision': 'sales',
+          'branchId': 1231223,
+        });
         Get.off(() => HomeVeiw(admin: email));
         sharedpref!.remove('id');
         sharedpref!.setString('id', FirebaseAuth.instance.currentUser!.uid);

@@ -28,6 +28,28 @@ class TxtFrmFeild {
     );
   }
 
+  static SizedBox buildQuntityTxtForm(
+      {required TextEditingController controller}) {
+    return SizedBox(
+      width: Get.width * 0.15,
+      height: Get.width * 0.08,
+      child: TextFormField(
+        controller: controller,
+        keyboardType: TextInputType.number,
+        textAlign: TextAlign.center,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.symmetric(vertical: 0),
+          hintText: '23'.tr,
+          hintStyle: TextStyle(
+            fontSize: Get.width * 0.04,
+            fontWeight: FontWeight.w700,
+            color: AppColors.primaryColor.withOpacity(0.5),
+          ),
+        ),
+      ),
+    );
+  }
+
   static SizedBox buildpasswordTxtForm(
       {required TextEditingController controller,
       required bool obs,

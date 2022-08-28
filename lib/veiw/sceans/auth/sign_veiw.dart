@@ -68,7 +68,6 @@ class SignVeiw extends GetWidget<LoginVeiwModel> {
                         txt: '1'.tr,
                         ontap: () async {
                           if (_key.currentState!.validate()) {
-                            sharedpref!.setInt('id', 121212);
                             sharedpref!.setString('company', 'company1');
                             await controller.signIn(
                               userCont.text,

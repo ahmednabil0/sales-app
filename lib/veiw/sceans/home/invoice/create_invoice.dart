@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:new_app/veiw/components/app_bar.dart';
 import 'package:new_app/veiw/components/back_ground.dart';
 import 'package:new_app/veiw/components/bttons.dart';
 import 'package:new_app/veiw/components/drob_down.dart';
 import 'package:new_app/veiw/components/txt_frm_feilds/txt_forms.dart';
+import 'package:new_app/veiw/sceans/home/invoice/add_item.dart';
 import 'package:new_app/veiw_model/invoces/create_invoice_veiw_model.dart';
 
 class CreateInvoice extends GetWidget<InvoiceVeiwModel> {
   CreateInvoice({super.key}) {
     DateTime date = DateTime.now();
-    dateCont.text = '${date.year}/${date.month}/${date.day}';
+    String dateTime = Jiffy(date).format("yyyy/mm/dd");
+    dateCont.text = dateTime;
   }
   final TextEditingController dateCont = TextEditingController();
   @override
@@ -42,7 +45,12 @@ class CreateInvoice extends GetWidget<InvoiceVeiwModel> {
                 SizedBox(
                   height: Get.width * 0.03,
                 ),
-                CustomButton4(ontap: () {}, txt: '21'.tr)
+                CustomButton4(
+                    ontap: () {
+                      controller.clear();
+                      Get.to(() => AddItemVeiw());
+                    },
+                    txt: '21'.tr)
               ],
             ),
           ),

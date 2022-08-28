@@ -147,3 +147,117 @@ class CustomButton3 extends StatelessWidget {
     );
   }
 }
+
+// ignore: must_be_immutable
+class CustomButton5 extends StatelessWidget {
+  CustomButton5({
+    required this.ontap,
+    required this.txt,
+    Key? key,
+  }) : super(key: key);
+  String txt;
+  void Function() ontap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: ontap,
+      child: Container(
+        alignment: Alignment.center,
+        width: Get.width * 0.15,
+        height: Get.width * 0.1,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            Get.width * 0.02,
+          ),
+          gradient: LinearGradient(colors: [
+            AppColors.primaryColor.withOpacity(0.35),
+            AppColors.primaryColor.withOpacity(0.28)
+          ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+        ),
+        child: AppText(
+          txt: txt,
+          size: Get.width * 0.035,
+          fw: FontWeight.w700,
+          color: AppColors.backgroundColor,
+        ),
+      ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class CustomButton6 extends StatelessWidget {
+  CustomButton6({
+    required this.icon,
+    required this.ontap,
+    required this.txt,
+    Key? key,
+  }) : super(key: key);
+  String txt;
+  void Function() ontap;
+  IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: ontap,
+      child: Container(
+          alignment: Alignment.center,
+          width: Get.width * 0.12,
+          height: Get.width * 0.08,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(
+              Get.width * 0.02,
+            ),
+            gradient: LinearGradient(colors: [
+              AppColors.primaryColor.withOpacity(0.35),
+              AppColors.primaryColor.withOpacity(0.28)
+            ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+          ),
+          child: Icon(
+            icon,
+            color: AppColors.backgroundColor,
+          )),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class CustomButton7 extends StatelessWidget {
+  CustomButton7({
+    required this.ontap,
+    required this.txt,
+    Key? key,
+  }) : super(key: key);
+  String txt;
+  void Function() ontap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: ontap,
+      child: Container(
+        alignment: Alignment.center,
+        width: Get.width * 0.912,
+        height: Get.width * 0.1,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(Get.width * 0.07),
+            bottomRight: Radius.circular(Get.width * 0.07),
+          ),
+          gradient: LinearGradient(colors: [
+            AppColors.primaryColor,
+            AppColors.primaryColor.withOpacity(0.78)
+          ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+        ),
+        child: AppText(
+          txt: txt,
+          size: Get.width * 0.05,
+          fw: FontWeight.bold,
+          color: AppColors.backgroundColor,
+        ),
+      ),
+    );
+  }
+}

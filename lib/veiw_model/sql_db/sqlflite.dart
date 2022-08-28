@@ -40,7 +40,8 @@ class MyDataBase {
     ''');
     await db.execute(''' 
     CREATE TABLE "items" (
-      "inviceId" INTEGER  NOT NULL ,
+      "id" INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT ,
+      "invoiceId" INTEGER  NOT NULL ,
       "itemId" INTEGER  NOT NULL ,
       "name" TEXT NOT NULL , 
       "price" REAL NOT NULL,

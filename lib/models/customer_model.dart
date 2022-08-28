@@ -2,7 +2,7 @@
 
 class CustomerModel {
   String cid;
-  String companyId;
+  int companyId;
   String companyName;
   String custName;
   String phone;
@@ -35,7 +35,7 @@ class CustomerModel {
   factory CustomerModel.fromMap(map) {
     return CustomerModel(
       cid: map['cid'] ?? '',
-      companyId: map['companyId'] ?? '',
+      companyId: map['companyId']?.toInt() ?? 0,
       companyName: map['companyName'] ?? '',
       custName: map['custName'] ?? '',
       phone: map['phone'] ?? '',
