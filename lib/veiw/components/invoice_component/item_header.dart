@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/veiw/components/custom_text.dart';
 import 'package:new_app/veiw/helper/consts/colors.dart';
+import 'package:new_app/veiw_model/invoces/create_invoice_veiw_model.dart';
 
 Padding buildItemHeader() {
   return Padding(
@@ -76,9 +77,10 @@ Container buildItemHeaderTwo() {
   );
 }
 
-InkWell buildItemHeaderthr() {
+InkWell buildItemHeaderthr(InvoiceVeiwModel controller) {
   return InkWell(
     onTap: () {
+      controller.calTotal();
       Get.back();
     },
     child: Padding(

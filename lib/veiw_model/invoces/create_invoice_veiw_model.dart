@@ -1,12 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:new_app/main.dart';
 import 'package:new_app/models/customer_model.dart';
 import 'package:new_app/models/items_model.dart';
 
 class InvoiceVeiwModel extends GetxController {
   TextEditingController quntityCont = TextEditingController();
+  TextEditingController deliveryCont = TextEditingController();
+  TextEditingController vatCont = TextEditingController();
 
   // get customers data
   //start
@@ -74,7 +77,6 @@ class InvoiceVeiwModel extends GetxController {
     if (!selectedList.contains(i)) {
       selectedList.add(i);
     }
-    // print(selectedList);
     update();
   }
 
@@ -83,12 +85,26 @@ class InvoiceVeiwModel extends GetxController {
     update();
   }
 
-  void calTotal() {}
+  double total = 0.0;
+  void calTotal() {
+    if (selectedList.isNotEmpty) {
+      total = 0.0;
+      for (ItemModel element in selectedList) {
+        total = total + (element.price * element.quntity);
+      }
+      total = total +
+          double.parse(deliveryCont.text) +
+          (double.parse(vatCont.text) * total);
+    }
+    update();
+  }
 
   @override
   void onInit() async {
     await getCustomersDate();
     await getItemData();
+    deliveryCont.text = '0.0';
+    vatCont.text = '0.0';
     super.onInit();
   }
 }

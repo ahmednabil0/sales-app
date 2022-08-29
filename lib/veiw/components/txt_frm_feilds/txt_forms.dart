@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/veiw/components/custom_text.dart';
 import 'package:new_app/veiw/helper/consts/colors.dart';
 
 class TxtFrmFeild {
@@ -46,6 +47,76 @@ class TxtFrmFeild {
             color: AppColors.primaryColor.withOpacity(0.5),
           ),
         ),
+      ),
+    );
+  }
+
+  static SizedBox buildDeliveryTxtForm(
+      {required TextEditingController controller}) {
+    return SizedBox(
+      width: Get.width * 0.35,
+      child: Column(
+        children: [
+          AppText(
+            txt: '29'.tr,
+            size: Get.width * 0.04,
+            fw: FontWeight.bold,
+            color: AppColors.primaryColor,
+          ),
+          SizedBox(
+            width: Get.width * 0.3,
+            height: Get.width * 0.08,
+            child: TextFormField(
+              controller: controller,
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                hintText: '30'.tr,
+                hintStyle: TextStyle(
+                  fontSize: Get.width * 0.04,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primaryColor.withOpacity(0.5),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static SizedBox buildQVatTxtForm(
+      {required TextEditingController controller}) {
+    return SizedBox(
+      width: Get.width * 0.35,
+      child: Column(
+        children: [
+          AppText(
+            txt: '31'.tr,
+            size: Get.width * 0.04,
+            fw: FontWeight.bold,
+            color: AppColors.primaryColor,
+          ),
+          SizedBox(
+            width: Get.width * 0.3,
+            height: Get.width * 0.08,
+            child: TextFormField(
+              controller: controller,
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                hintText: '30'.tr,
+                hintStyle: TextStyle(
+                  fontSize: Get.width * 0.04,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primaryColor.withOpacity(0.5),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
