@@ -1,7 +1,7 @@
 class ItemModel {
   int companyId;
   String companyName;
-  String id;
+  int id;
   String name;
   double price;
   String unit;

@@ -4,7 +4,7 @@ class Invoice {
   String dueDate;
   double total;
   String customerName;
-  int salesId;
+  String salesId;
   String company;
   Invoice({
     this.id,
@@ -32,14 +32,14 @@ class Invoice {
     return result;
   }
 
-  factory Invoice.fromMap(Map<String, dynamic> map) {
+  factory Invoice.fromMap(map) {
     return Invoice(
       id: map['id']?.toInt(),
       date: map['date'] ?? '',
       dueDate: map['dueDate'] ?? '',
       total: map['total']?.toDouble() ?? 0.0,
       customerName: map['customerName'] ?? '',
-      salesId: map['salesId']?.toInt() ?? 0,
+      salesId: map['salesId'] ?? '',
       company: map['company'] ?? '',
     );
   }

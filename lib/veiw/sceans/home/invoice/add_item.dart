@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/veiw/components/app_bar.dart';
 import 'package:new_app/veiw/components/back_ground.dart';
-import 'package:new_app/veiw/components/bttons.dart';
 import 'package:new_app/veiw/components/invoice_component/get_items.dart';
 import 'package:new_app/veiw/components/invoice_component/item_header.dart';
 import 'package:new_app/veiw/components/txt_frm_feilds/txt_forms.dart';
@@ -36,22 +35,10 @@ class AddItemVeiw extends GetWidget<InvoiceVeiwModel> {
                 TxtFrmFeild.buildQVatTxtForm(
                   controller: controller.vatCont,
                 ),
-                Column(
-                  children: [
-                    SizedBox(
-                      height: Get.width * 0.07,
-                    ),
-                    CustomButton8(
-                        ontap: () {
-                          controller.calTotal();
-                        },
-                        txt: 'اضافة'),
-                  ],
-                )
               ],
             ),
             SizedBox(
-              height: Get.width * 0.01,
+              height: Get.width * 0.03,
             ),
             buildItemHeaderthr(controller),
           ],

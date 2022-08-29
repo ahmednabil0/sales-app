@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MyLocalController controller = Get.put(MyLocalController());
-
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       locale: controller.intaillocal,

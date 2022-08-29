@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:new_app/main.dart';
 import 'package:new_app/models/customer_model.dart';
+import 'package:new_app/models/invoice_model.dart';
+import 'package:new_app/models/item_sql_model.dart';
 import 'package:new_app/models/items_model.dart';
+import 'package:new_app/veiw_model/sql_db/sqlflite.dart';
 
 class InvoiceVeiwModel extends GetxController {
   TextEditingController quntityCont = TextEditingController();
@@ -29,7 +31,7 @@ class InvoiceVeiwModel extends GetxController {
     });
   }
 
-  String intailData = '20'.tr;
+  String? intailData;
   oncganged(String? val) {
     intailData = val.toString();
     update();
@@ -96,6 +98,53 @@ class InvoiceVeiwModel extends GetxController {
           double.parse(deliveryCont.text) +
           (double.parse(vatCont.text) * total);
     }
+    update();
+  }
+
+  //sql
+  //start
+  MyDataBase db = MyDataBase();
+
+  Future<int> insertInvoice(Invoice invoice) async {
+    int i = await db.createinvoice(invoice);
+    return i;
+  }
+
+  Future<void> insertItem(ItemSqlmodel item) async {
+    await db.createitems(item);
+  }
+
+  Future<void> getAll() async {
+    await db.getAllProducts();
+    await db.getAllItems();
+  }
+  //end
+
+  Future<void> addItemsDb(int num) async {
+    for (var i in selectedList) {
+      await insertItem(ItemSqlmodel(
+          invoiceId: num,
+          itemId: i.id,
+          name: i.name,
+          price: i.price,
+          unit: i.unit,
+          quntity: i.quntity));
+    }
+  }
+
+  showCircular() {
+    Get.defaultDialog(
+        barrierDismissible: false,
+        title: '',
+        content: const LinearProgressIndicator());
+  }
+
+  void clearContent() {
+    selectedList.clear();
+    intailData = null;
+    vatCont.text = '0.0';
+    deliveryCont.text = '0.0';
+    total = 0.0;
     update();
   }
 

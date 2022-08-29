@@ -9,9 +9,13 @@ SizedBox buildDrobDown({required InvoiceVeiwModel controller}) {
   return SizedBox(
     width: Get.width * 0.85,
     child: DropdownSearch<String>(
+        autoValidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
           if (value == null || value.isEmpty) {
             return '5'.tr;
+          }
+          if (controller.selectedList.isEmpty) {
+            return '38'.tr;
           }
           return null;
         },
@@ -36,6 +40,10 @@ SizedBox buildDrobDown({required InvoiceVeiwModel controller}) {
         enabled: true,
         dropdownDecoratorProps: DropDownDecoratorProps(
           dropdownSearchDecoration: InputDecoration(
+            errorStyle: TextStyle(
+              fontSize: Get.width * 0.035,
+              fontWeight: FontWeight.w800,
+            ),
             prefixIcon: const Icon(
               Icons.person,
               color: AppColors.primaryColor,

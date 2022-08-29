@@ -7,8 +7,8 @@ import 'package:new_app/veiw_model/data/home_data.dart';
 
 // ignore: must_be_immutable
 class HomeVeiw extends StatelessWidget {
-  HomeVeiw({required this.admin, super.key});
-  String admin;
+  HomeVeiw({this.admin, super.key});
+  String? admin;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class HomeVeiw extends StatelessWidget {
               children: [
                 AppTextWidgtt(
                   txt: '10'.tr,
-                  txt2: admin,
+                  txt2: 'customer name',
                   size: Get.width * 0.05,
                   fw: FontWeight.bold,
                   color: AppColors.primaryColor.withOpacity(0.69),
