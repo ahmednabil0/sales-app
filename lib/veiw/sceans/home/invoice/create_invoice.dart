@@ -4,7 +4,7 @@ import 'package:jiffy/jiffy.dart';
 import 'package:new_app/veiw/components/app_bar.dart';
 import 'package:new_app/veiw/components/back_ground.dart';
 import 'package:new_app/veiw/components/bttons.dart';
-import 'package:new_app/veiw/components/drob_down.dart';
+import 'package:new_app/veiw/components/invoice_component/drob_down.dart';
 import 'package:new_app/veiw/components/txt_frm_feilds/txt_forms.dart';
 import 'package:new_app/veiw/sceans/home/invoice/add_item.dart';
 import 'package:new_app/veiw_model/invoces/create_invoice_veiw_model.dart';
