@@ -25,7 +25,10 @@ class MyDataBase {
     return mydb;
   }
 
-  FutureOr<void> _upgrade(Database db, int oldVersion, int newVersion) {}
+  FutureOr<void> _upgrade(Database db, int oldVersion, int newVersion) {
+    // ignore: avoid_print
+    print('upgraded============================');
+  }
 
   FutureOr<void> _oncreate(Database db, int version) async {
     await db.execute(''' 
@@ -36,7 +39,8 @@ class MyDataBase {
       "total" REAL NOT NULL ,
       "customerName" TEXT NOT NULL ,
       "salesId" TEXT NOT NULL ,
-      "company" TEXT NOT NULL 
+      "company" TEXT NOT NULL ,
+      "uploaded" INTEGER NOT NULL
     )
     ''');
     await db.execute(''' 
@@ -63,6 +67,13 @@ class MyDataBase {
     return response;
   }
 
+  Future<int> clear() async {
+    Database? mydb = await db;
+    return mydb!.delete(
+      'invoices',
+    );
+  }
+
   Future<List<Map<String, Object?>>> getAllProducts() async {
     Database db = await intialDb();
     return db.query('invoices');
@@ -73,17 +84,28 @@ class MyDataBase {
     return db.query('items');
   }
 
+  Future<List<Map<String, Object?>>> getPurItems(int invoiceId) async {
+    Database db = await intialDb();
+    return db.query('items', where: 'invoiceId = ?', whereArgs: [invoiceId]);
+  }
+
   Future<int> delete(int id) async {
     Database db = await intialDb();
     return db.delete('invoices', where: 'id = ?', whereArgs: [id]);
   }
 
-  Future<int> clear() async {
-    Database db = await intialDb();
-    return db.delete(
-      'invoices',
-    );
+  myDelete() async {
+    String databasepath = await getDatabasesPath();
+    String path = join(databasepath, 'ahmed.db');
+    return deleteDatabase(path);
   }
+
+  // Future<int> clear() async {
+  //   Database db = await intialDb();
+  //   return db.delete(
+  //     'invoices',
+  //   );
+  // }
 
   Future<int> update(Invoice invoice) async {
     Database db = await intialDb();

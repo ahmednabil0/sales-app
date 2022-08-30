@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:new_app/main.dart';
 import 'package:new_app/veiw/sceans/home/home_veiw.dart';
+import 'package:new_app/veiw_model/functions/ckeck_internet.dart';
 
 class LoginVeiwModel extends GetxController {
   bool opscur = true;
@@ -80,5 +81,18 @@ class LoginVeiwModel extends GetxController {
     }
 
     // ignore: unnecessary_null_comparison
+  }
+
+  bool? res;
+  datd() async {
+    res = await ckeckInternet();
+    // ignore: avoid_print
+    print(res);
+  }
+
+  @override
+  void onInit() {
+    datd();
+    super.onInit();
   }
 }

@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:new_app/main.dart';
 import 'package:new_app/models/customer_model.dart';
 import 'package:new_app/models/invoice_model.dart';
 import 'package:new_app/models/item_sql_model.dart';
 import 'package:new_app/models/items_model.dart';
+import 'package:new_app/models/online_invoice_model.dart';
+import 'package:new_app/veiw/sceans/home/invoice/completed_veiw.dart';
+import 'package:new_app/veiw_model/functions/ckeck_internet.dart';
 import 'package:new_app/veiw_model/sql_db/sqlflite.dart';
 
 class InvoiceVeiwModel extends GetxController {
@@ -114,10 +118,25 @@ class InvoiceVeiwModel extends GetxController {
     await db.createitems(item);
   }
 
-  Future<void> getAll() async {
-    await db.getAllProducts();
-    await db.getAllItems();
+  Future<void> clearDb() async {
+    int i = await db.clear();
+    // ignore: avoid_print
+    print(i);
   }
+
+  Future<void> getAll() async {
+    List list1 = await db.getAllProducts();
+    List list2 = await db.getAllItems();
+    // ignore: avoid_print
+    print(list1);
+    // ignore: avoid_print
+    print(list2);
+  }
+
+  void deltaa() async {
+    db.myDelete();
+  }
+
   //end
 
   Future<void> addItemsDb(int num) async {
@@ -148,8 +167,81 @@ class InvoiceVeiwModel extends GetxController {
     update();
   }
 
+  //upload invoice
+  //stert
+  bool? internet;
+  CollectionReference invoicesRef =
+      FirebaseFirestore.instance.collection('invoices');
+  Future<void> uploadInvoice() async {
+    internet = await ckeckInternet();
+    // ignore: avoid_print
+    print(internet);
+    if (internet == false) {
+      int i = await insertInvoice(
+        Invoice(
+          date: dateTime!,
+          dueDate: dueDate!,
+          total: total,
+          customerName: intailData!,
+          salesId: sharedpref!.getString('id')!,
+          company: sharedpref!.getString('company')!,
+          uploaded: 0,
+        ),
+      );
+      await addItemsDb(i);
+      // await controller.getAll();
+      clearContent();
+      Get.off(() => const CompletedScrean());
+    }
+    if (internet == true) {
+      int i = await insertInvoice(
+        Invoice(
+          date: dateTime!,
+          dueDate: dueDate!,
+          total: total,
+          customerName: intailData!,
+          salesId: sharedpref!.getString('id')!,
+          company: sharedpref!.getString('company')!,
+          uploaded: 1,
+        ),
+      );
+      await addItemsDb(i);
+      List myList = await getSpecficItem(i);
+      await invoicesRef.doc().set(FirebaseInvoiceModel(
+            id: i,
+            date: dateTime!,
+            dueDate: dueDate!,
+            total: total,
+            customerName: intailData!,
+            salesId: sharedpref!.getString('id')!,
+            company: sharedpref!.getString('company')!,
+            uploaded: 1,
+            items: myList,
+            delivery: double.parse(deliveryCont.text),
+            vat: double.parse(vatCont.text),
+          ).toMap());
+
+      clearContent();
+      Get.off(() => const CompletedScrean());
+    }
+  }
+
+  // end
+  Future<List> getSpecficItem(int id) async {
+    List itemlista = await db.getPurItems(id);
+    return itemlista;
+  }
+
+  String? dateTime;
+  String? dueDate;
+  final TextEditingController dateCont = TextEditingController();
   @override
   void onInit() async {
+    DateTime date = DateTime.now();
+    dateTime = Jiffy(date).format("yyyy/MM/dd");
+    DateTime due = DateTime.now().add(const Duration(days: 7));
+    dueDate = Jiffy(due).format("yyyy/MM/dd");
+    dateCont.text = dateTime!;
     await getCustomersDate();
     await getItemData();
     deliveryCont.text = '0.0';
