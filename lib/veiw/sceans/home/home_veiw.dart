@@ -4,11 +4,18 @@ import 'package:new_app/veiw/components/back_ground.dart';
 import 'package:new_app/veiw/components/custom_text.dart';
 import 'package:new_app/veiw/helper/consts/colors.dart';
 import 'package:new_app/veiw_model/data/home_data.dart';
+import 'package:new_app/veiw_model/invoces/offline_invoices.dart';
 
 // ignore: must_be_immutable
 class HomeVeiw extends StatelessWidget {
-  HomeVeiw({this.admin, super.key});
+  HomeVeiw({this.admin, super.key}) {
+    upload();
+  }
   String? admin;
+  OffLineInvoices instance = OffLineInvoices();
+  void upload() async {
+    await instance.upload();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,8 @@ class Invoice {
   String salesId;
   String company;
   int uploaded;
+  double vat;
+  double delivery;
   Invoice({
     this.id,
     required this.date,
@@ -16,6 +18,8 @@ class Invoice {
     required this.salesId,
     required this.company,
     required this.uploaded,
+    required this.vat,
+    required this.delivery,
   });
 
   Map<String, dynamic> toMap() {
@@ -31,6 +35,8 @@ class Invoice {
     result.addAll({'salesId': salesId});
     result.addAll({'company': company});
     result.addAll({'uploaded': uploaded});
+    result.addAll({'vat': vat});
+    result.addAll({'delivery': delivery});
 
     return result;
   }
@@ -45,6 +51,8 @@ class Invoice {
       salesId: map['salesId'] ?? '',
       company: map['company'] ?? '',
       uploaded: map['uploaded']?.toInt() ?? 0,
+      vat: map['vat']?.toDouble() ?? 0.0,
+      delivery: map['delivery']?.toDouble() ?? 0.0,
     );
   }
 }

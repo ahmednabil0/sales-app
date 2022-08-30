@@ -27,13 +27,13 @@ class SignVeiw extends GetWidget<LoginVeiwModel> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
-                  height: Get.width * 0.05,
+                  height: Get.width * 0.12,
                 ),
                 Image.asset(
                   'assets/images/logo.png',
-                  height: Get.width * 0.4,
+                  height: Get.width * 0.5,
                 ),
-                SizedBox(height: Get.width * 0.1),
+                SizedBox(height: Get.width * 0.00),
                 AppText(
                   txt: '1'.tr,
                   size: Get.width * 0.065,

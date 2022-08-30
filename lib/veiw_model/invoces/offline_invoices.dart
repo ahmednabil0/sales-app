@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:new_app/main.dart';
 import 'package:new_app/models/invoice_model.dart';
+import 'package:new_app/models/online_invoice_model.dart';
+import 'package:new_app/veiw_model/functions/ckeck_internet.dart';
 import 'package:new_app/veiw_model/sql_db/sqlflite.dart';
 
 class OffLineInvoices extends GetxController {
@@ -20,9 +24,48 @@ class OffLineInvoices extends GetxController {
     update();
   }
 
+  Future<void> deleteInvoce(int id) async {
+    db.delete(id);
+  }
+
+  Future<void> deleteItem(int id) async {
+    db.deleteItem(id);
+  }
+
+  CollectionReference invoicesRef =
+      FirebaseFirestore.instance.collection('invoices');
+  bool? internet;
+  upload() async {
+    internet = await ckeckInternet();
+    if (internet == true) {
+      if (ofllinList.isNotEmpty) {
+        for (var i in ofllinList) {
+          await invoicesRef.doc().set(FirebaseInvoiceModel(
+                id: i['invoice'].id,
+                date: i['invoice'].date,
+                dueDate: i['invoice'].dueDate,
+                total: i['invoice'].total,
+                customerName: i['invoice'].customerName,
+                salesId: sharedpref!.getString('id')!,
+                company: sharedpref!.getString('company')!,
+                uploaded: 1,
+                items: i['items'],
+                delivery: i['invoice'].delivery,
+                vat: i['invoice'].vat,
+              ).toMap());
+          deleteInvoce(i['invoice'].id);
+          deleteItem(i['invoice'].id);
+        }
+        ofllinList.clear();
+      }
+    }
+    update();
+  }
+
   @override
-  void onInit() {
-    getOfflineInvoices();
+  void onInit() async {
+    await getOfflineInvoices();
+    await upload();
     super.onInit();
   }
 }

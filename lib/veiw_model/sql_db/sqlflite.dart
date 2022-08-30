@@ -21,7 +21,7 @@ class MyDataBase {
     String databasepath = await getDatabasesPath();
     String path = join(databasepath, 'ahmed.db');
     Database mydb = await openDatabase(path,
-        onCreate: _oncreate, version: 1, onUpgrade: _upgrade);
+        onCreate: _oncreate, version: 2, onUpgrade: _upgrade);
     return mydb;
   }
 
@@ -33,14 +33,16 @@ class MyDataBase {
   FutureOr<void> _oncreate(Database db, int version) async {
     await db.execute(''' 
     CREATE TABLE "invoices" (
-      "id" INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT ,
+      "id" INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
       "date" TEXT NOT NULL , 
       "dueDate" TEXT NOT NULL ,
       "total" REAL NOT NULL ,
       "customerName" TEXT NOT NULL ,
       "salesId" TEXT NOT NULL ,
       "company" TEXT NOT NULL ,
-      "uploaded" INTEGER NOT NULL
+      "uploaded" INTEGER NOT NULL ,
+      "vat" REAL NOT NULL ,
+      "delivery" REAL NOT NULL 
     )
     ''');
     await db.execute(''' 
@@ -99,9 +101,15 @@ class MyDataBase {
     return db.delete('invoices', where: 'id = ?', whereArgs: [id]);
   }
 
+  Future<int> deleteItem(int invoiceId) async {
+    Database db = await intialDb();
+    return db.delete('items', where: 'invoiceId = ?', whereArgs: [invoiceId]);
+  }
+
   myDelete() async {
     String databasepath = await getDatabasesPath();
     String path = join(databasepath, 'ahmed.db');
+    // print('deeeeee');
     return deleteDatabase(path);
   }
 
