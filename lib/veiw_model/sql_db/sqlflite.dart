@@ -89,6 +89,11 @@ class MyDataBase {
     return db.query('items', where: 'invoiceId = ?', whereArgs: [invoiceId]);
   }
 
+  Future<List<Map<String, Object?>>> getofflineItems(int uploaded) async {
+    Database db = await intialDb();
+    return db.query('invoices', where: 'uploaded = ?', whereArgs: [uploaded]);
+  }
+
   Future<int> delete(int id) async {
     Database db = await intialDb();
     return db.delete('invoices', where: 'id = ?', whereArgs: [id]);

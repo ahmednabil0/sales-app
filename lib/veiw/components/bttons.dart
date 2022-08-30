@@ -297,3 +297,42 @@ class CustomButton8 extends StatelessWidget {
     );
   }
 }
+
+// ignore: must_be_immutable
+class CustomButton9 extends StatelessWidget {
+  CustomButton9({
+    required this.ontap,
+    required this.txt,
+    Key? key,
+  }) : super(key: key);
+  String txt;
+  void Function() ontap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: ontap,
+      child: Container(
+        alignment: Alignment.center,
+        width: Get.width * 0.97,
+        height: Get.width * 0.1,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(Get.width * 0.05),
+            bottomRight: Radius.circular(Get.width * 0.05),
+          ),
+          gradient: LinearGradient(colors: [
+            AppColors.primaryColor,
+            AppColors.primaryColor.withOpacity(0.78)
+          ], begin: Alignment.centerLeft, end: Alignment.centerRight),
+        ),
+        child: AppText(
+          txt: txt,
+          size: Get.width * 0.05,
+          fw: FontWeight.bold,
+          color: AppColors.backgroundColor,
+        ),
+      ),
+    );
+  }
+}
