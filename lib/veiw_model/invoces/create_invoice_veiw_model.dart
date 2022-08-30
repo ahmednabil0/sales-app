@@ -202,7 +202,7 @@ class InvoiceVeiwModel extends GetxController {
           customerName: intailData!,
           salesId: sharedpref!.getString('id')!,
           company: sharedpref!.getString('company')!,
-          uploaded: 0,
+          uploaded: 1,
         ),
       );
       await addItemsDb(i);
