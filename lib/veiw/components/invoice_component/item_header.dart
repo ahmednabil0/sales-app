@@ -36,8 +36,8 @@ Container buildItemHeaderTwo() {
     height: Get.width * 0.1,
     decoration: BoxDecoration(
       gradient: LinearGradient(colors: [
-        AppColors.primaryColor,
-        AppColors.primaryColor.withOpacity(0.78)
+        AppColors.seconrayColor.withOpacity(0.8),
+        AppColors.seconrayColor
       ], begin: Alignment.centerLeft, end: Alignment.centerRight),
       color: AppColors.primaryColor,
       borderRadius: BorderRadius.only(

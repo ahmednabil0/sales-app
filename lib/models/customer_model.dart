@@ -6,7 +6,7 @@ class CustomerModel {
   String companyName;
   String custName;
   String phone;
-  bool rent;
+  int rent;
   double rent_value;
   CustomerModel({
     required this.cid,
@@ -39,7 +39,7 @@ class CustomerModel {
       companyName: map['companyName'] ?? '',
       custName: map['custName'] ?? '',
       phone: map['phone'] ?? '',
-      rent: map['rent'] ?? false,
+      rent: map['rent']?.toInt() ?? 0,
       rent_value: map['rent_value']?.toDouble() ?? 0.0,
     );
   }

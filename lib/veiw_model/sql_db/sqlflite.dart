@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:new_app/models/customer_model.dart';
 import 'package:new_app/models/invoice_model.dart';
 import 'package:new_app/models/item_sql_model.dart';
+import 'package:new_app/models/items_model.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -56,11 +58,45 @@ class MyDataBase {
       "quntity" INTEGER NOT NULL
     )
     ''');
+    await db.execute(''' 
+    CREATE TABLE "itemsoffline" (
+      "companyId" INTEGER NOT NULL ,
+      "companyName" TEXT NOT NULL ,
+      "id" INTEGER NOT NULL ,
+      "name" TEXT NOT NULL , 
+      "price" REAL NOT NULL ,
+      "quntity" INTEGER NOT NULL ,
+      "unit" TEXT NOT NULL ,
+      "url" TEXT NOT NULL ,
+      "vat" REAL NOT NULL
+    )
+    ''');
+    await db.execute(''' 
+    CREATE TABLE "customers" (
+      "cid" TEXT NOT NULL ,
+      "companyId" INTEGER NOT NULL ,
+      "companyName" TEXT NOT NULL ,
+      "custName" TEXT NOT NULL , 
+      "phone" TEXT NOT NULL ,
+      "rent" INTEGER NOT NULL ,
+      "rent_value" REAL NOT NULL
+    )
+    ''');
   }
 
   Future<int> createinvoice(Invoice invoice) async {
     Database? mydb = await db;
     return mydb!.insert('invoices', invoice.toMap());
+  }
+
+  Future<int> addProducts(ItemModel item) async {
+    Database? mydb = await db;
+    return mydb!.insert('itemsoffline', item.toMap());
+  }
+
+  Future<int> addCustomers(CustomerModel cust) async {
+    Database? mydb = await db;
+    return mydb!.insert('customers', cust.toMap());
   }
 
   Future<int> createitems(ItemSqlmodel item) async {
@@ -79,6 +115,16 @@ class MyDataBase {
   Future<List<Map<String, Object?>>> getAllProducts() async {
     Database db = await intialDb();
     return db.query('invoices');
+  }
+
+  Future<List<Map<String, Object?>>> getAllItem() async {
+    Database db = await intialDb();
+    return db.query('itemsoffline');
+  }
+
+  Future<List<Map<String, Object?>>> getAllCustomers() async {
+    Database db = await intialDb();
+    return db.query('customers');
   }
 
   Future<List<Map<String, Object?>>> getAllItems() async {

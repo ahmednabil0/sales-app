@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/veiw/helper/theme/theme.dart';
 import 'package:new_app/veiw/sceans/auth/sign_veiw.dart';
+import 'package:new_app/veiw/sceans/home/home_veiw.dart';
 import 'package:new_app/veiw_model/localization/local.dart';
 import 'package:new_app/veiw_model/localization/local_veiw_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
       translations: MyLocal(),
       title: 'Flutter Demo',
       theme: getThemeDate(),
-      home: SignVeiw(),
+      home: HomeVeiw(),
     );
   }
 }

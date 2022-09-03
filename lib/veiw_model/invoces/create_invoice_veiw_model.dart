@@ -25,15 +25,27 @@ class InvoiceVeiwModel extends GetxController {
   CollectionReference customersRef =
       FirebaseFirestore.instance.collection('customers');
   Future<void> getCustomersDate() async {
-    await customersRef.get().then((value) {
-      for (var i in value.docs) {
-        mylist.add(CustomerModel.fromMap(i));
-      }
-      for (int i = 0; i < mylist.length; i++) {
-        afterList.add(mylist[i].custName);
-      }
-      update();
-    });
+    List myList = await db.getAllCustomers();
+
+    if (myList.isEmpty) {
+      await customersRef.get().then((value) async {
+        for (var i in value.docs) {
+          await db.addCustomers(CustomerModel.fromMap(i));
+        }
+      });
+    }
+    update();
+  }
+
+  Future<void> getCustomerData() async {
+    List myList = await db.getAllCustomers();
+    for (var i in myList) {
+      mylist.add(CustomerModel.fromMap(i));
+    }
+    for (int i = 0; i < mylist.length; i++) {
+      afterList.add(mylist[i].custName);
+    }
+    update();
   }
 
   String? intailData;
@@ -51,20 +63,30 @@ class InvoiceVeiwModel extends GetxController {
   CollectionReference itemsRef =
       FirebaseFirestore.instance.collection('products');
   Future<void> getItemData() async {
-    await itemsRef
-        .where(
-          'companyName',
-          isEqualTo: sharedpref!.getString('company'),
-        )
-        .get()
-        .then((value) {
-      for (var i in value.docs) {
-        itemList.add(
-          ItemModel.fromMap(i),
-        );
-      }
-      update();
-    });
+    List myList = await db.getAllItem();
+    if (myList.isEmpty) {
+      await itemsRef
+          .where(
+            'companyName',
+            isEqualTo: sharedpref!.getString('company'),
+          )
+          .get()
+          .then((value) async {
+        for (var i in value.docs) {
+          db.addProducts(ItemModel.fromMap(i));
+        }
+      });
+    }
+
+    update();
+  }
+
+  Future<void> getProductsData() async {
+    List myList = await db.getAllItem();
+    for (var i in myList) {
+      itemList.add(ItemModel.fromMap(i));
+    }
+    update();
   }
 
   //end
@@ -250,7 +272,9 @@ class InvoiceVeiwModel extends GetxController {
     dueDate = Jiffy(due).format("yyyy/MM/dd");
     dateCont.text = dateTime!;
     await getCustomersDate();
+    await getCustomerData();
     await getItemData();
+    await getProductsData();
     deliveryCont.text = '0.0';
     vatCont.text = '0.0';
     super.onInit();
