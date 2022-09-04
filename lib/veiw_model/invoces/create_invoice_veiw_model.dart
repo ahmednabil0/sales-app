@@ -16,6 +16,8 @@ import 'package:new_app/veiw_model/sql_db/sqlflite.dart';
 class InvoiceVeiwModel extends GetxController {
   TextEditingController quntityCont = TextEditingController();
   TextEditingController deliveryCont = TextEditingController();
+  TextEditingController payedCont = TextEditingController();
+  TextEditingController rentCont = TextEditingController();
   TextEditingController vatCont = TextEditingController();
 
   // get customers data
@@ -211,6 +213,8 @@ class InvoiceVeiwModel extends GetxController {
           uploaded: 0,
           delivery: double.parse(deliveryCont.text),
           vat: double.parse(vatCont.text),
+          payed: double.parse(payedCont.text),
+          rent: double.parse(rentCont.text),
         ),
       );
       await addItemsDb(i);
@@ -230,6 +234,8 @@ class InvoiceVeiwModel extends GetxController {
           uploaded: 1,
           delivery: double.parse(deliveryCont.text),
           vat: double.parse(vatCont.text),
+          payed: double.parse(payedCont.text),
+          rent: double.parse(rentCont.text),
         ),
       );
       await addItemsDb(i);
@@ -245,6 +251,8 @@ class InvoiceVeiwModel extends GetxController {
             uploaded: 1,
             items: myList,
             delivery: double.parse(deliveryCont.text),
+            payed: double.parse(payedCont.text),
+            rent: double.parse(rentCont.text),
             vat: double.parse(vatCont.text),
           ).toMap());
 

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class FirebaseInvoiceModel {
   int id;
   String date;
@@ -10,6 +12,8 @@ class FirebaseInvoiceModel {
   List items;
   double vat;
   double delivery;
+  double payed;
+  double rent;
   FirebaseInvoiceModel({
     required this.id,
     required this.date,
@@ -22,6 +26,8 @@ class FirebaseInvoiceModel {
     required this.items,
     required this.vat,
     required this.delivery,
+    required this.payed,
+    required this.rent,
   });
 
   Map<String, dynamic> toMap() {
@@ -38,6 +44,8 @@ class FirebaseInvoiceModel {
     result.addAll({'items': items});
     result.addAll({'vat': vat});
     result.addAll({'delivery': delivery});
+    result.addAll({'payed': payed});
+    result.addAll({'rent': rent});
 
     return result;
   }
@@ -55,6 +63,8 @@ class FirebaseInvoiceModel {
       items: List.from(map['items']),
       vat: map['vat']?.toDouble() ?? 0.0,
       delivery: map['delivery']?.toDouble() ?? 0.0,
+      payed: map['payed']?.toDouble() ?? 0.0,
+      rent: map['rent']?.toDouble() ?? 0.0,
     );
   }
 }

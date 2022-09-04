@@ -52,6 +52,8 @@ class OffLineInvoices extends GetxController {
                 items: i['items'],
                 delivery: i['invoice'].delivery,
                 vat: i['invoice'].vat,
+                payed: i['invoice'].payed,
+                rent: i['invoice'].rent,
               ).toMap());
           deleteInvoce(i['invoice'].id);
           deleteItem(i['invoice'].id);

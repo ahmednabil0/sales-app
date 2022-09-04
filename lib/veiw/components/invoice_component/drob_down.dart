@@ -17,6 +17,7 @@ SizedBox buildDrobDown({required InvoiceVeiwModel controller}) {
           if (controller.selectedList.isEmpty) {
             return '38'.tr;
           }
+
           return null;
         },
         clearButtonProps: const ClearButtonProps(

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       translations: MyLocal(),
       title: 'Flutter Demo',
       theme: getThemeDate(),
-      home: HomeVeiw(),
+      home: sharedpref!.getString('id') == null ? SignVeiw() : HomeVeiw(),
     );
   }
 }

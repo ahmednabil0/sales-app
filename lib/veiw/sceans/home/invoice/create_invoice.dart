@@ -14,6 +14,7 @@ import 'package:new_app/veiw_model/invoces/create_invoice_veiw_model.dart';
 class CreateInvoice extends GetWidget<InvoiceVeiwModel> {
   CreateInvoice({super.key});
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  final GlobalKey<FormState> _key2 = GlobalKey<FormState>();
   @override
   final controller = Get.put(InvoiceVeiwModel());
 
@@ -66,17 +67,46 @@ class CreateInvoice extends GetWidget<InvoiceVeiwModel> {
                 buildSummeryinvoice(),
                 //end
                 SizedBox(
-                  height: Get.width * 0.08,
+                  height: Get.width * 0.01,
+                ),
+                Form(
+                  key: _key2,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          TxtFrmFeild.buildPayedTxtForm(
+                            cont: controller,
+                            controller: controller.payedCont,
+                          ),
+                          GetBuilder<InvoiceVeiwModel>(
+                            builder: (controller) =>
+                                TxtFrmFeild.buildRentTxtForm(
+                              controller: controller.rentCont,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: Get.width * 0.025,
                 ),
                 CustomButton3(
                   ontap: () async {
-                    if (_key.currentState!.validate()) {
+                    if (_key.currentState!.validate() &&
+                        _key2.currentState!.validate()) {
                       controller.showCircular();
                       await controller.uploadInvoice();
                       await controller.getAll();
                     }
                   },
                   txt: '37'.tr,
+                ),
+                SizedBox(
+                  height: Get.width * 0.015,
                 ),
               ],
             ),

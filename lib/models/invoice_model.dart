@@ -9,6 +9,8 @@ class Invoice {
   int uploaded;
   double vat;
   double delivery;
+  double payed;
+  double rent;
   Invoice({
     this.id,
     required this.date,
@@ -20,6 +22,8 @@ class Invoice {
     required this.uploaded,
     required this.vat,
     required this.delivery,
+    required this.payed,
+    required this.rent,
   });
 
   Map<String, dynamic> toMap() {
@@ -37,6 +41,8 @@ class Invoice {
     result.addAll({'uploaded': uploaded});
     result.addAll({'vat': vat});
     result.addAll({'delivery': delivery});
+    result.addAll({'payed': payed});
+    result.addAll({'rent': rent});
 
     return result;
   }
@@ -53,6 +59,8 @@ class Invoice {
       uploaded: map['uploaded']?.toInt() ?? 0,
       vat: map['vat']?.toDouble() ?? 0.0,
       delivery: map['delivery']?.toDouble() ?? 0.0,
+      payed: map['payed']?.toDouble() ?? 0.0,
+      rent: map['rent']?.toDouble() ?? 0.0,
     );
   }
 }

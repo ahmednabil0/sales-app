@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/veiw/components/custom_text.dart';
 import 'package:new_app/veiw/helper/consts/colors.dart';
+import 'package:new_app/veiw_model/invoces/create_invoice_veiw_model.dart';
 
 class TxtFrmFeild {
   static SizedBox buildUserTxtForm(
@@ -121,6 +122,94 @@ class TxtFrmFeild {
     );
   }
 
+  static SizedBox buildPayedTxtForm(
+      {required InvoiceVeiwModel cont,
+      required TextEditingController controller}) {
+    return SizedBox(
+      width: Get.width * 0.35,
+      child: Column(
+        children: [
+          AppText(
+            txt: '46'.tr,
+            size: Get.width * 0.04,
+            fw: FontWeight.bold,
+            color: AppColors.primaryColor,
+          ),
+          SizedBox(
+            width: Get.width * 0.3,
+            child: TextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'required*';
+                }
+                return null;
+              },
+              onChanged: (value) {
+                if (cont.total > 0) {
+                  cont.rentCont.text =
+                      (cont.total - double.parse(cont.payedCont.text))
+                          .toString();
+                }
+              },
+              controller: controller,
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                hintText: '30'.tr,
+                hintStyle: TextStyle(
+                  fontSize: Get.width * 0.04,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primaryColor.withOpacity(0.5),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static SizedBox buildRentTxtForm(
+      {required TextEditingController controller}) {
+    return SizedBox(
+      width: Get.width * 0.35,
+      child: Column(
+        children: [
+          AppText(
+            txt: '47'.tr,
+            size: Get.width * 0.04,
+            fw: FontWeight.bold,
+            color: AppColors.primaryColor,
+          ),
+          SizedBox(
+            width: Get.width * 0.3,
+            child: TextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'required*';
+                }
+                return null;
+              },
+              controller: controller,
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                hintText: '30'.tr,
+                hintStyle: TextStyle(
+                  fontSize: Get.width * 0.04,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primaryColor.withOpacity(0.5),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   static SizedBox buildpasswordTxtForm(
       {required TextEditingController controller,
       required bool obs,
@@ -172,7 +261,7 @@ class TxtFrmFeild {
         style: const TextStyle(
             color: AppColors.primaryColor, fontWeight: FontWeight.w600),
         decoration: InputDecoration(
-          hintText: '2'.tr,
+          hintText: '39'.tr,
           hintStyle: TextStyle(
             fontSize: Get.width * 0.04,
             fontWeight: FontWeight.w700,

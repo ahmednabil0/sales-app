@@ -44,7 +44,9 @@ class MyDataBase {
       "company" TEXT NOT NULL ,
       "uploaded" INTEGER NOT NULL ,
       "vat" REAL NOT NULL ,
-      "delivery" REAL NOT NULL 
+      "delivery" REAL NOT NULL ,
+      "payed" REAL NOT NULL ,
+      "rent" REAL NOT NULL
     )
     ''');
     await db.execute(''' 
