@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class FirebaseInvoiceModel {
   int id;
   String date;

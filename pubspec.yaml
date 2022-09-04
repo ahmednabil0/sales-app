@@ -45,6 +45,7 @@ dependencies:
   dropdown_search: ^5.0.2
   firebase_auth: ^3.7.0
   jiffy: ^5.0.0
+  qr_flutter: ^4.0.0
 
 dev_dependencies:
   flutter_test:
