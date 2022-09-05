@@ -149,6 +149,11 @@ class MyDataBase {
     return db.delete('invoices', where: 'id = ?', whereArgs: [id]);
   }
 
+  Future<int> update(int id, Map<String, Object> map) async {
+    Database db = await intialDb();
+    return db.update('invoices', map, where: 'id = ?', whereArgs: [id]);
+  }
+
   Future<int> deleteItem(int invoiceId) async {
     Database db = await intialDb();
     return db.delete('items', where: 'invoiceId = ?', whereArgs: [invoiceId]);
@@ -168,9 +173,9 @@ class MyDataBase {
   //   );
   // }
 
-  Future<int> update(Invoice invoice) async {
-    Database db = await intialDb();
-    return db.update('products', invoice.toMap(),
-        where: 'id = ?', whereArgs: [invoice.id]);
-  }
+  // Future<int> update(Invoice invoice) async {
+  //   Database db = await intialDb();
+  //   return db.update('products', invoice.toMap(),
+  //       where: 'id = ?', whereArgs: [invoice.id]);
+  // }
 }

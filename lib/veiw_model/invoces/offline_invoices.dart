@@ -24,8 +24,8 @@ class OffLineInvoices extends GetxController {
     update();
   }
 
-  Future<void> deleteInvoce(int id) async {
-    db.delete(id);
+  Future<void> updateInvoce(int id) async {
+    db.update(id, {"uploaded": 1});
   }
 
   Future<void> deleteItem(int id) async {
@@ -55,8 +55,8 @@ class OffLineInvoices extends GetxController {
                 payed: i['invoice'].payed,
                 rent: i['invoice'].rent,
               ).toMap());
-          deleteInvoce(i['invoice'].id);
-          deleteItem(i['invoice'].id);
+          updateInvoce(i['invoice'].id);
+          // deleteItem(i['invoice'].id);
         }
         ofllinList.clear();
       }

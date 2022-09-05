@@ -4,304 +4,379 @@ import 'package:new_app/models/online_invoice_model.dart';
 import 'package:new_app/veiw/components/app_bar.dart';
 import 'package:new_app/veiw/components/back_ground.dart';
 import 'package:new_app/veiw/components/custom_text.dart';
+import 'package:new_app/veiw/components/invoice_component/drob_down.dart';
+import 'package:new_app/veiw/components/txt_frm_feilds/txt_forms.dart';
 import 'package:new_app/veiw/helper/consts/colors.dart';
+import 'package:new_app/veiw_model/invoces/edit_veiw_model.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 // ignore: must_be_immutable
-class EditInvoiceDetailsVeiw extends StatelessWidget {
-  EditInvoiceDetailsVeiw({required this.controller, super.key});
-  FirebaseInvoiceModel controller;
+class EditInvoiceDetailsVeiw extends GetWidget<EditViewModel> {
+  EditInvoiceDetailsVeiw({required this.cont, super.key}) {
+    data();
+    controller.passData(cont.customerName);
+    copanyCont.text = cont.company;
+    dateCont.text = cont.date;
+    vatCont.text = cont.vat.toString();
+    deliveryCont.text = cont.delivery.toString();
+    paymentCont.text = cont.payed.toString();
+    rentCont.text = cont.rent.toString();
+    totalCont.text = cont.total.toString();
+    dueDateCont.text = cont.dueDate;
+  }
+  FirebaseInvoiceModel cont;
+  void data() {
+    controller.moveData(cont.items);
+  }
+
+  @override
+  final controller = Get.put(EditViewModel());
+  final TextEditingController copanyCont = TextEditingController();
+  final TextEditingController dateCont = TextEditingController();
+  final TextEditingController dueDateCont = TextEditingController();
+  final TextEditingController vatCont = TextEditingController();
+  final TextEditingController deliveryCont = TextEditingController();
+  final TextEditingController totalCont = TextEditingController();
+  final TextEditingController paymentCont = TextEditingController();
+  final TextEditingController rentCont = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: createBackGroundHome(
         child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(Get.width * 0.042),
+          child: SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: Get.width,
-                  height: Get.height * 0.7,
-                  decoration: BoxDecoration(
-                      color: AppColors.backgroundColor,
-                      boxShadow: [
-                        BoxShadow(
-                            color: AppColors.fontColor.withOpacity(0.42),
-                            blurRadius: 5,
-                            offset: const Offset(1, 1)),
-                      ]),
-                  child: Column(
-                    children: [
-                      buildAppBar(txt: '18'.tr),
-                      const Divider(
-                        color: AppColors.primaryColor,
-                        thickness: 0.7,
-                        indent: 10,
-                        height: 2,
-                        endIndent: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Spacer(),
-                          AppText(
-                            txt: '41'.tr,
-                            size: Get.width * 0.045,
-                            fw: FontWeight.w800,
-                            color: AppColors.primaryColor,
-                          ),
-                          AppText(
-                            txt: ' ${controller.id} #',
-                            size: Get.width * 0.045,
-                            fw: FontWeight.w800,
-                            color: Colors.red,
-                          ),
-                          const Spacer(),
-                          QrImage(
-                            data: controller.id.toString(),
-                            version: QrVersions.auto,
-                            size: Get.width * 0.15,
-                            foregroundColor: AppColors.primaryColor,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: Get.width * 0.025,
-                          ),
-                          AppText(
-                            txt: '${'48'.tr}:',
-                            size: Get.width * 0.035,
-                            fw: FontWeight.w800,
-                            color: AppColors.primaryColor,
-                          ),
-                          AppText(
-                            txt: ' ${controller.company}',
-                            size: Get.width * 0.035,
-                            fw: FontWeight.w800,
-                            color: Colors.purple,
-                          ),
-                          const Spacer(),
-                          AppText(
-                            txt: '${'42'.tr}: ',
-                            size: Get.width * 0.035,
-                            fw: FontWeight.w800,
-                            color: AppColors.primaryColor,
-                          ),
-                          AppText(
-                            txt: ' ${controller.customerName}',
-                            size: Get.width * 0.035,
-                            fw: FontWeight.w800,
-                            color: Colors.purple,
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.025,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: Get.width * 0.025,
-                          ),
-                          AppText(
-                            txt: '${'43'.tr}:',
-                            size: Get.width * 0.035,
-                            fw: FontWeight.w800,
-                            color: AppColors.primaryColor,
-                          ),
-                          AppText(
-                            txt: ' ${controller.date}',
-                            size: Get.width * 0.035,
-                            fw: FontWeight.w800,
-                            color: Colors.purple,
-                          ),
-                          const Spacer(),
-                          AppText(
-                            txt: '${'49'.tr}: ',
-                            size: Get.width * 0.035,
-                            fw: FontWeight.w800,
-                            color: AppColors.primaryColor,
-                          ),
-                          AppText(
-                            txt: ' ${controller.dueDate}',
-                            size: Get.width * 0.035,
-                            fw: FontWeight.w800,
-                            color: Colors.purple,
-                          ),
-                          SizedBox(
-                            width: Get.width * 0.025,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: Get.width * 0.05,
-                      ),
-                      SizedBox(
-                        child: Padding(
-                          padding: EdgeInsets.all(Get.width * 0.02),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(Get.width * 0.03),
-                              border: Border.all(
-                                color: AppColors.primaryColor,
-                                width: 2,
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    AppText(
-                                      txt: '24'.tr,
-                                      size: Get.width * 0.045,
-                                      fw: FontWeight.bold,
-                                      color: AppColors.primaryColor,
-                                    ),
-                                    AppText(
-                                      txt: '25'.tr,
-                                      size: Get.width * 0.045,
-                                      fw: FontWeight.bold,
-                                      color: AppColors.primaryColor,
-                                    ),
-                                    AppText(
-                                      txt: '27'.tr,
-                                      size: Get.width * 0.045,
-                                      fw: FontWeight.bold,
-                                      color: AppColors.primaryColor,
-                                    ),
-                                    AppText(
-                                      txt: '23'.tr,
-                                      size: Get.width * 0.045,
-                                      fw: FontWeight.bold,
-                                      color: AppColors.primaryColor,
-                                    ),
-                                  ],
-                                ),
-                                const Divider(
-                                  color: AppColors.primaryColor,
-                                  thickness: 1,
-                                ),
-                                SizedBox(
-                                  height: Get.height * 0.3,
-                                  child: ListView.builder(
-                                    itemCount: controller.items.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              AppText(
-                                                txt: controller.items[index]
-                                                    ['name'],
-                                                size: Get.width * 0.045,
-                                                fw: FontWeight.bold,
-                                                color: AppColors.primaryColor,
-                                              ),
-                                              AppText(
-                                                txt: controller.items[index]
-                                                        ['price']
-                                                    .toString(),
-                                                size: Get.width * 0.045,
-                                                fw: FontWeight.bold,
-                                                color: AppColors.primaryColor,
-                                              ),
-                                              AppText(
-                                                txt: controller.items[index]
-                                                    ['unit'],
-                                                size: Get.width * 0.045,
-                                                fw: FontWeight.bold,
-                                                color: AppColors.primaryColor,
-                                              ),
-                                              AppText(
-                                                txt: controller.items[index]
-                                                        ['quntity']
-                                                    .toString(),
-                                                size: Get.width * 0.045,
-                                                fw: FontWeight.bold,
-                                                color: AppColors.primaryColor,
-                                              ),
-                                            ],
-                                          ),
-                                          const Divider(
-                                            color: AppColors.primaryColor,
-                                            thickness: 1,
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      SizedBox(
-                        height: Get.width * 0.021,
-                      ),
-                      const Divider(
-                        color: AppColors.primaryColor,
-                        thickness: 0.7,
-                        indent: 10,
-                        height: 5,
-                        endIndent: 10,
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: Get.width * 0.1,
-                          ),
-                          AppText(
-                            txt: '${'34'.tr}:',
-                            size: Get.width * 0.04,
-                            fw: FontWeight.w800,
-                            color: AppColors.primaryColor,
-                          ),
-                          AppText(
-                            txt: ' ${controller.total}',
-                            size: Get.width * 0.04,
-                            fw: FontWeight.w800,
-                            color: Colors.purple,
-                          ),
-                          const Spacer(),
-                          AppText(
-                            txt: '${'50'.tr}: ',
-                            size: Get.width * 0.04,
-                            fw: FontWeight.w800,
-                            color: AppColors.primaryColor,
-                          ),
-                          AppText(
-                            txt: ' ${controller.payed}',
-                            size: Get.width * 0.04,
-                            fw: FontWeight.w800,
-                            color: Colors.purple,
-                          ),
-                          SizedBox(width: Get.width * 0.1),
-                        ],
-                      ),
-                      SizedBox(
-                        height: Get.width * 0.02,
-                      ),
-                    ],
-                  ),
+                buildBody(),
+                AppText(
+                  txt: '51'.tr,
+                  size: Get.width * 0.05,
+                  fw: FontWeight.bold,
+                  color: AppColors.primaryColor,
                 ),
+                SizedBox(
+                  height: Get.height * 0.25,
+                  width: Get.width * 0.9,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Get.width * 0.04),
+                      border: Border.all(
+                        color: AppColors.primaryColor,
+                        width: 1.5,
+                      ),
+                    ),
+                    child: GetBuilder<EditViewModel>(
+                      builder: (controller) => ListView.builder(
+                        itemCount: controller.items.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var i = controller.items[index];
+                          final TextEditingController qCont =
+                              TextEditingController();
+                          qCont.text = i.quntity.toString();
+
+                          return Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  AppText(
+                                    txt: i.name,
+                                    size: Get.width * 0.045,
+                                    fw: FontWeight.w500,
+                                    color: AppColors.fontColor,
+                                  ),
+                                  AppText(
+                                    txt: i.price.toString(),
+                                    size: Get.width * 0.045,
+                                    fw: FontWeight.w500,
+                                    color: AppColors.fontColor,
+                                  ),
+                                  AppText(
+                                    txt: i.unit.toString(),
+                                    size: Get.width * 0.045,
+                                    fw: FontWeight.w500,
+                                    color: AppColors.fontColor,
+                                  ),
+                                  AppText(
+                                    txt: i.quntity.toString(),
+                                    size: Get.width * 0.045,
+                                    fw: FontWeight.w500,
+                                    color: AppColors.fontColor,
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      controller.removeItem(i);
+                                    },
+                                    icon: const Icon(
+                                      Icons.highlight_remove_rounded,
+                                      color: Colors.red,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const Divider(
+                                color: AppColors.primaryColor,
+                                thickness: 1,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Column buildBody() {
+    return Column(
+      children: [
+        buildAppBar(
+          txt: '18'.tr,
+        ),
+        SizedBox(
+          height: Get.width * 0.02,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Row(
+              children: [
+                AppText(
+                  txt: '41'.tr,
+                  size: Get.width * 0.045,
+                  fw: FontWeight.w800,
+                  color: AppColors.primaryColor,
+                ),
+                AppText(
+                  txt: ' ${cont.id} #',
+                  size: Get.width * 0.045,
+                  fw: FontWeight.w800,
+                  color: Colors.red,
+                ),
+              ],
+            ),
+            QrImage(
+              data: cont.id.toString(),
+              version: QrVersions.auto,
+              size: Get.width * 0.15,
+              foregroundColor: AppColors.primaryColor,
+            ),
+          ],
+        ),
+        SizedBox(
+          height: Get.width * 0.02,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppText(
+              txt: '${'20'.tr} :',
+              size: Get.width * 0.045,
+              fw: FontWeight.w800,
+              color: AppColors.primaryColor,
+            ),
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
+            SizedBox(
+              width: Get.width * 0.65,
+              child: buildDrobDown2(controller: controller),
+            )
+          ],
+        ),
+        SizedBox(
+          height: Get.width * 0.02,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppText(
+              txt: '${'48'.tr} :',
+              size: Get.width * 0.045,
+              fw: FontWeight.w800,
+              color: AppColors.primaryColor,
+            ),
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
+            SizedBox(
+              width: Get.width * 0.65,
+              child: TxtFrmFeild.buildnameTxtForm(
+                controller: copanyCont,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: Get.width * 0.02,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppText(
+              txt: '${'43'.tr} :',
+              size: Get.width * 0.039,
+              fw: FontWeight.w800,
+              color: AppColors.primaryColor,
+            ),
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
+            SizedBox(
+              width: Get.width * 0.65,
+              child: TxtFrmFeild.buildDateTxtForm(
+                controller: dateCont,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: Get.width * 0.02,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppText(
+              txt: '${'49'.tr} :',
+              size: Get.width * 0.039,
+              fw: FontWeight.w800,
+              color: AppColors.primaryColor,
+            ),
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
+            SizedBox(
+              width: Get.width * 0.65,
+              child: TxtFrmFeild.buildDateTxtForm(
+                controller: dueDateCont,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: Get.width * 0.02,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppText(
+              txt: '${'33'.tr} :        ',
+              size: Get.width * 0.039,
+              fw: FontWeight.w800,
+              color: AppColors.primaryColor,
+            ),
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
+            SizedBox(
+              width: Get.width * 0.65,
+              child: TxtFrmFeild.buildDateTxtForm(
+                controller: vatCont,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: Get.width * 0.02,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppText(
+              txt: '${'35'.tr} :        ',
+              size: Get.width * 0.039,
+              fw: FontWeight.w800,
+              color: AppColors.primaryColor,
+            ),
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
+            SizedBox(
+              width: Get.width * 0.65,
+              child: TxtFrmFeild.buildDateTxtForm(
+                controller: deliveryCont,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: Get.width * 0.02,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppText(
+              txt: '${'34'.tr} :        ',
+              size: Get.width * 0.039,
+              fw: FontWeight.w800,
+              color: AppColors.primaryColor,
+            ),
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
+            SizedBox(
+              width: Get.width * 0.65,
+              child: TxtFrmFeild.buildDateTxtForm(
+                controller: totalCont,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: Get.width * 0.02,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppText(
+              txt: '${'46'.tr} :',
+              size: Get.width * 0.039,
+              fw: FontWeight.w800,
+              color: AppColors.primaryColor,
+            ),
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
+            SizedBox(
+              width: Get.width * 0.65,
+              child: TxtFrmFeild.buildDateTxtForm(
+                controller: paymentCont,
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: Get.width * 0.02,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppText(
+              txt: '${'47'.tr} :',
+              size: Get.width * 0.039,
+              fw: FontWeight.w800,
+              color: AppColors.primaryColor,
+            ),
+            SizedBox(
+              width: Get.width * 0.02,
+            ),
+            SizedBox(
+              width: Get.width * 0.65,
+              child: TxtFrmFeild.buildDateTxtForm(
+                controller: rentCont,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

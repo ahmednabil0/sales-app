@@ -30,6 +30,31 @@ class TxtFrmFeild {
     );
   }
 
+  static SizedBox buildnameTxtForm(
+      {required TextEditingController controller}) {
+    return SizedBox(
+      width: Get.width * 0.9,
+      child: TextFormField(
+        controller: controller,
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return '5'.tr;
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+            hintText: '2'.tr,
+            hintStyle: TextStyle(
+              fontSize: Get.width * 0.04,
+              fontWeight: FontWeight.w700,
+              color: AppColors.primaryColor.withOpacity(0.5),
+            ),
+            prefixIcon: const Icon(Icons.home_repair_service_sharp),
+            prefixIconColor: AppColors.backgroundColor),
+      ),
+    );
+  }
+
   static SizedBox buildQuntityTxtForm(
       {required TextEditingController controller}) {
     return SizedBox(

@@ -101,6 +101,8 @@ class CreateInvoice extends GetWidget<InvoiceVeiwModel> {
                       controller.showCircular();
                       await controller.uploadInvoice();
                       await controller.getAll();
+                      controller.rentCont.clear();
+                      controller.payedCont.clear();
                     }
                   },
                   txt: '37'.tr,

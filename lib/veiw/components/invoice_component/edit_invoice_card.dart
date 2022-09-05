@@ -140,7 +140,7 @@ GetBuilder<EditViewModel> buildEditinvoiceCard() {
                           ontap: () {
                             Get.to(
                               () => EditInvoiceDetailsVeiw(
-                                controller: controller.invoiceList[index],
+                                cont: controller.invoiceList[index],
                               ),
                             );
                           },

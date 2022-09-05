@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:new_app/main.dart';
+import 'package:new_app/models/customer_model.dart';
+import 'package:new_app/models/item_sql_model.dart';
+import 'package:new_app/models/items_model.dart';
 import 'package:new_app/models/online_invoice_model.dart';
+import 'package:new_app/veiw/components/bttons.dart';
+import 'package:new_app/veiw/components/txt_frm_feilds/txt_forms.dart';
 import 'package:new_app/veiw/helper/consts/colors.dart';
+import 'package:new_app/veiw_model/sql_db/sqlflite.dart';
 
 class EditViewModel extends GetxController {
   final TextEditingController dateCont = TextEditingController();
@@ -77,14 +83,133 @@ class EditViewModel extends GetxController {
         .get()
         .then((value) {
       invoiceList.clear();
-      // ignore: avoid_print
-      print(value.docs);
-      // ignore: avoid_print
-      print('0000000000000000000000000000000');
+      // // ignore: avoid_print
+      // print(value.docs);
+      // // ignore: avoid_print
+      // print('0000000000000000000000000000000');
       for (var i in value.docs) {
         invoiceList.add(FirebaseInvoiceModel.fromMap(i));
       }
       update();
     });
+  }
+
+//=========================================\\
+  MyDataBase db = MyDataBase();
+  List<CustomerModel> mylist = [];
+  List<String> afterList = [];
+  CollectionReference customersRef =
+      FirebaseFirestore.instance.collection('customers');
+  Future<void> getCustomersDate() async {
+    List myList = await db.getAllCustomers();
+
+    if (myList.isEmpty) {
+      await customersRef.get().then((value) async {
+        for (var i in value.docs) {
+          await db.addCustomers(CustomerModel.fromMap(i));
+        }
+      });
+    }
+    update();
+  }
+
+  Future<void> getCustomerData() async {
+    List myList = await db.getAllCustomers();
+    for (var i in myList) {
+      mylist.add(CustomerModel.fromMap(i));
+    }
+    for (int i = 0; i < mylist.length; i++) {
+      afterList.add(mylist[i].custName);
+    }
+    update();
+  }
+
+  void passData(String id) {
+    intailData = id;
+  }
+
+  String? intailData;
+  oncganged(String? val) {
+    intailData = val.toString();
+    update();
+  }
+  //end
+
+  //get items data
+  //start
+  List<ItemModel> itemList = [];
+  List<ItemModel> selectedList = [];
+
+  CollectionReference itemsRef =
+      FirebaseFirestore.instance.collection('products');
+  Future<void> getItemData() async {
+    List myList = await db.getAllItem();
+    if (myList.isEmpty) {
+      await itemsRef
+          .where(
+            'companyName',
+            isEqualTo: sharedpref!.getString('company'),
+          )
+          .get()
+          .then((value) async {
+        for (var i in value.docs) {
+          db.addProducts(ItemModel.fromMap(i));
+        }
+      });
+    }
+
+    update();
+  }
+
+  Future<void> getProductsData() async {
+    List myList = await db.getAllItem();
+    for (var i in myList) {
+      itemList.add(ItemModel.fromMap(i));
+    }
+    update();
+  }
+
+  //=========================================\\
+  List<ItemSqlmodel> items = [];
+  void moveData(List list) {
+    items.clear();
+    for (var i in list) {
+      items.add(ItemSqlmodel.fromMap(i));
+    }
+    // ignore: avoid_print
+    print(list);
+  }
+
+  void removeItem(var i) {
+    items.remove(i);
+    update();
+  }
+
+  final TextEditingController qCont = TextEditingController();
+  void editQuntity(ItemSqlmodel item, int index, int i) {
+    items.remove(items[index]);
+    items.insert(
+      index,
+      ItemSqlmodel(
+        invoiceId: item.invoiceId,
+        itemId: item.itemId,
+        name: item.name,
+        price: item.price,
+        unit: item.unit,
+        quntity: i,
+      ),
+    );
+
+    update();
+    print(items[index].toMap());
+  }
+
+  @override
+  void onInit() async {
+    await getCustomersDate();
+    await getCustomerData();
+    await getProductsData();
+    await getItemData();
+    super.onInit();
   }
 }
