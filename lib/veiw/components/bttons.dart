@@ -241,7 +241,7 @@ class CustomButton16 extends StatelessWidget {
       onTap: ontap,
       child: Container(
           alignment: Alignment.center,
-          width: Get.width * 0.12,
+          width: Get.width * 0.25,
           height: Get.width * 0.113,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(

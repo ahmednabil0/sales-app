@@ -4,18 +4,60 @@ import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:new_app/main.dart';
 import 'package:new_app/models/customer_model.dart';
-import 'package:new_app/models/item_sql_model.dart';
-import 'package:new_app/models/items_model.dart';
 import 'package:new_app/models/online_invoice_model.dart';
 import 'package:new_app/veiw/helper/consts/colors.dart';
 import 'package:new_app/veiw_model/sql_db/sqlflite.dart';
 
-class EditViewModel extends GetxController {
+class RentInvoiceViewModel extends GetxController {
   final TextEditingController dateCont = TextEditingController();
+  final TextEditingController payedCont = TextEditingController();
+  final TextEditingController rentCont = TextEditingController();
+  final TextEditingController willPayCont = TextEditingController();
+  //=========================================\\
+  MyDataBase db = MyDataBase();
+  List<CustomerModel> mylist = [];
+  List<String> afterList = [];
+  CollectionReference customersRef =
+      FirebaseFirestore.instance.collection('customers');
+  Future<void> getCustomersDate() async {
+    List myList = await db.getAllCustomers();
 
+    if (myList.isEmpty) {
+      await customersRef.get().then((value) async {
+        for (var i in value.docs) {
+          await db.addCustomers(CustomerModel.fromMap(i));
+        }
+      });
+    }
+    update();
+  }
+
+  Future<void> getCustomerData() async {
+    List myList = await db.getAllCustomers();
+    for (var i in myList) {
+      mylist.add(CustomerModel.fromMap(i));
+    }
+    for (int i = 0; i < mylist.length; i++) {
+      afterList.add(mylist[i].custName);
+    }
+    update();
+  }
+
+  void passData(String id) {
+    intailData = id;
+  }
+
+  String? intailData;
+  oncganged(String? val) {
+    intailData = val.toString();
+    update();
+  }
+  //end
+
+  //=========================================\\
   SizedBox buildDateTxtFormCust(context) {
     return SizedBox(
-      width: Get.width * 0.9,
+      width: Get.width * 0.85,
       child: TextFormField(
         controller: dateCont,
         validator: (value) {
@@ -73,10 +115,11 @@ class EditViewModel extends GetxController {
   CollectionReference invoicesRef =
       FirebaseFirestore.instance.collection('invoices');
   List<FirebaseInvoiceModel> invoiceList = [];
-  Future<void> getData(String date) async {
+  Future<void> getData(String date, String name) async {
     await invoicesRef
         .where('salesId', isEqualTo: sharedpref!.getString('id'))
         .where('company', isEqualTo: sharedpref!.getString('company'))
+        .where('customerName', isEqualTo: name)
         .where('date', isEqualTo: date)
         .get()
         .then((value) {
@@ -88,127 +131,40 @@ class EditViewModel extends GetxController {
       for (var i in value.docs) {
         invoiceList.add(FirebaseInvoiceModel.fromMap(i));
       }
+
       update();
     });
   }
 
-//=========================================\\
-  MyDataBase db = MyDataBase();
-  List<CustomerModel> mylist = [];
-  List<String> afterList = [];
-  CollectionReference customersRef =
-      FirebaseFirestore.instance.collection('customers');
-  Future<void> getCustomersDate() async {
-    List myList = await db.getAllCustomers();
+  List<FirebaseInvoiceModel> confirmInvoiceList = [];
+  void addToList(FirebaseInvoiceModel model) {
+    confirmInvoiceList.clear();
+    confirmInvoiceList.add(model);
+    dateCont.text = "${dateCont.text} ___ ${'41'.tr} # ${model.id}";
+    payedCont.text = model.payed.toStringAsFixed(2).toString();
+    rentCont.text = model.rent.toStringAsFixed(2).toString();
+    update();
+  }
 
-    if (myList.isEmpty) {
-      await customersRef.get().then((value) async {
-        for (var i in value.docs) {
-          await db.addCustomers(CustomerModel.fromMap(i));
-        }
-      });
+  void addMoney() {
+    if (double.parse(willPayCont.text).isGreaterThan(0.0)) {
+      payedCont.text = (double.parse(payedCont.text.trim()) +
+              double.parse(willPayCont.text.trim()))
+          .toStringAsFixed(2)
+          .toString();
+      rentCont.text =
+          (confirmInvoiceList[0].total - double.parse(payedCont.text.trim()))
+              .toStringAsFixed(2)
+              .toString();
+    } else {
+      Get.snackbar('invalid', 'عملية غير صالحة');
     }
-    update();
-  }
-
-  Future<void> getCustomerData() async {
-    List myList = await db.getAllCustomers();
-    for (var i in myList) {
-      mylist.add(CustomerModel.fromMap(i));
-    }
-    for (int i = 0; i < mylist.length; i++) {
-      afterList.add(mylist[i].custName);
-    }
-    update();
-  }
-
-  void passData(String id) {
-    intailData = id;
-  }
-
-  String? intailData;
-  oncganged(String? val) {
-    intailData = val.toString();
-    update();
-  }
-  //end
-
-  //get items data
-  //start
-  List<ItemModel> itemList = [];
-  List<ItemModel> selectedList = [];
-
-  CollectionReference itemsRef =
-      FirebaseFirestore.instance.collection('products');
-  Future<void> getItemData() async {
-    List myList = await db.getAllItem();
-    if (myList.isEmpty) {
-      await itemsRef
-          .where(
-            'companyName',
-            isEqualTo: sharedpref!.getString('company'),
-          )
-          .get()
-          .then((value) async {
-        for (var i in value.docs) {
-          db.addProducts(ItemModel.fromMap(i));
-        }
-      });
-    }
-
-    update();
-  }
-
-  Future<void> getProductsData() async {
-    List myList = await db.getAllItem();
-    for (var i in myList) {
-      itemList.add(ItemModel.fromMap(i));
-    }
-    update();
-  }
-
-  //=========================================\\
-  List<ItemSqlmodel> items = [];
-  void moveData(List list) {
-    items.clear();
-    for (var i in list) {
-      items.add(ItemSqlmodel.fromMap(i));
-    }
-    // ignore: avoid_print
-    print(list);
-  }
-
-  void removeItem(var i) {
-    items.remove(i);
-    update();
-  }
-
-  final TextEditingController qCont = TextEditingController();
-  void editQuntity(ItemSqlmodel item, int index, int i) {
-    items.remove(items[index]);
-    items.insert(
-      index,
-      ItemSqlmodel(
-        invoiceId: item.invoiceId,
-        itemId: item.itemId,
-        name: item.name,
-        price: item.price,
-        unit: item.unit,
-        quntity: i,
-      ),
-    );
-
-    update();
-    // ignore: avoid_print
-    print(items[index].toMap());
   }
 
   @override
   void onInit() async {
     await getCustomersDate();
     await getCustomerData();
-    await getProductsData();
-    await getItemData();
     super.onInit();
   }
 }
