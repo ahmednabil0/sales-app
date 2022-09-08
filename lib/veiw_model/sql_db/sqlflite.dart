@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:new_app/models/customer_model.dart';
 import 'package:new_app/models/invoice_model.dart';
 import 'package:new_app/models/item_sql_model.dart';
@@ -10,6 +9,8 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class MyDataBase {
+// create data base
+// start
   static Database? _db;
   Future<Database?> get db async {
     if (_db == null) {
@@ -29,10 +30,13 @@ class MyDataBase {
   }
 
   FutureOr<void> _upgrade(Database db, int oldVersion, int newVersion) {
-    // ignore: avoid_print
+// ignore: avoid_print
     print('upgraded============================');
   }
+// end
 
+// create tables
+//start
   FutureOr<void> _oncreate(Database db, int version) async {
     await db.execute(''' 
     CREATE TABLE "invoices" (
@@ -102,7 +106,10 @@ class MyDataBase {
     )
     ''');
   }
+//end
 
+// add data to data base
+//start
   Future<int> createinvoice(Invoice invoice) async {
     Database? mydb = await db;
     return mydb!.insert('invoices', invoice.toMap());
@@ -128,14 +135,34 @@ class MyDataBase {
     int response = await mydb!.insert('items', item.toMap());
     return response;
   }
+//end
 
-  Future<int> clear() async {
+// clear data base
+// start
+  Future<int> clearInvoices() async {
     Database? mydb = await db;
     return mydb!.delete(
       'invoices',
     );
   }
 
+  Future<int> clearItems() async {
+    Database? mydb = await db;
+    return mydb!.delete(
+      'items',
+    );
+  }
+
+  Future<int> clearRents() async {
+    Database? mydb = await db;
+    return mydb!.delete(
+      'rents',
+    );
+  }
+  //end
+
+// get data from data base
+// start
   Future<List<Map<String, Object?>>> getAllProducts() async {
     Database db = await intialDb();
     return db.query('invoices');
@@ -171,14 +198,13 @@ class MyDataBase {
     return db.query('invoices', where: 'uploaded = ?', whereArgs: [uploaded]);
   }
 
+//end
+
+// delete data
+// start
   Future<int> delete(int id) async {
     Database db = await intialDb();
     return db.delete('invoices', where: 'id = ?', whereArgs: [id]);
-  }
-
-  Future<int> update(int id, Map<String, Object> map) async {
-    Database db = await intialDb();
-    return db.update('invoices', map, where: 'id = ?', whereArgs: [id]);
   }
 
   Future<int> deleteItem(int invoiceId) async {
@@ -192,6 +218,15 @@ class MyDataBase {
     // print('deeeeee');
     return deleteDatabase(path);
   }
+// end
+
+//  update date
+//start
+  Future<int> update(int id, Map<String, Object> map) async {
+    Database db = await intialDb();
+    return db.update('invoices', map, where: 'id = ?', whereArgs: [id]);
+  }
+//end
 
   // Future<int> clear() async {
   //   Database db = await intialDb();

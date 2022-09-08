@@ -143,11 +143,11 @@ class InvoiceVeiwModel extends GetxController {
     await db.createitems(item);
   }
 
-  Future<void> clearDb() async {
-    int i = await db.clear();
-    // ignore: avoid_print
-    print(i);
-  }
+  // Future<void> clearDb() async {
+  //   int i = await db.clear();
+  //   // ignore: avoid_print
+  //   print(i);
+  // }
 
   Future<void> getAll() async {
     List list1 = await db.getAllProducts();
