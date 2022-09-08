@@ -5,6 +5,7 @@ import 'package:jiffy/jiffy.dart';
 import 'package:new_app/main.dart';
 import 'package:new_app/models/customer_model.dart';
 import 'package:new_app/models/online_invoice_model.dart';
+import 'package:new_app/models/rents_model.dart';
 import 'package:new_app/veiw/helper/consts/colors.dart';
 import 'package:new_app/veiw_model/sql_db/sqlflite.dart';
 
@@ -13,6 +14,7 @@ class RentInvoiceViewModel extends GetxController {
   final TextEditingController payedCont = TextEditingController();
   final TextEditingController rentCont = TextEditingController();
   final TextEditingController willPayCont = TextEditingController();
+  CollectionReference rentRef = FirebaseFirestore.instance.collection('rents');
   //=========================================\\
   MyDataBase db = MyDataBase();
   List<CustomerModel> mylist = [];
@@ -146,7 +148,8 @@ class RentInvoiceViewModel extends GetxController {
     update();
   }
 
-  void addMoney() {
+  void addMoney(FirebaseInvoiceModel model) async {
+    Get.defaultDialog(title: '', content: const CircularProgressIndicator());
     if (double.parse(willPayCont.text).isGreaterThan(0.0)) {
       payedCont.text = (double.parse(payedCont.text.trim()) +
               double.parse(willPayCont.text.trim()))
@@ -156,6 +159,67 @@ class RentInvoiceViewModel extends GetxController {
           (confirmInvoiceList[0].total - double.parse(payedCont.text.trim()))
               .toStringAsFixed(2)
               .toString();
+      await Future.delayed(const Duration(milliseconds: 200));
+      await invoicesRef
+          .where('id', isEqualTo: model.id)
+          .where('salesId', isEqualTo: model.salesId)
+          .where('company', isEqualTo: model.company)
+          .where('customerName', isEqualTo: model.customerName)
+          .where('date', isEqualTo: model.date)
+          .get()
+          .then((value) async {
+        for (var i in value.docs) {
+          invoicesRef.doc(i.id).update(FirebaseInvoiceModel(
+                id: model.id,
+                date: model.date,
+                dueDate: model.dueDate,
+                total: model.total,
+                customerName: model.customerName,
+                salesId: model.salesId,
+                company: model.company,
+                uploaded: model.uploaded,
+                items: model.items,
+                vat: model.vat,
+                delivery: model.delivery,
+                payed: double.parse(willPayCont.text) + model.payed,
+                rent: double.parse(rentCont.text),
+              ).toMap());
+
+          rentRef.doc().set({
+            "invoiceId": model.id,
+            "oldSalesId": model.salesId,
+            "salesId": sharedpref!.getString('id'),
+            "payed": double.parse(willPayCont.text),
+            "totalPayed": double.parse(willPayCont.text) + model.payed,
+            "rent": double.parse(rentCont.text),
+            "customer": model.customerName,
+            "company": model.company,
+            "invoiceDate": model.date,
+            "date": Jiffy(DateTime.now()).format("yyyy/MM/dd"),
+            "totalInvoice": model.total
+          });
+          MyDataBase db = MyDataBase();
+          await db.createRents(
+            RentsModel(
+              date: Jiffy(DateTime.now()).format("yyyy/MM/dd"),
+              invoiceDate: model.date,
+              invoiceid: model.id,
+              totalInvoice: model.total,
+              customer: model.customerName,
+              salesId: sharedpref!.getString('id')!,
+              oldSalesId: model.salesId,
+              company: model.company,
+              rent: double.parse(rentCont.text),
+              payed: double.parse(willPayCont.text),
+              totalPayed: double.parse(willPayCont.text) + model.payed,
+            ),
+          );
+          // List mylist = await db.getAllRents();
+          // print(mylist);
+        }
+      });
+      Get.back();
+      Get.back();
     } else {
       Get.snackbar('invalid', 'عملية غير صالحة');
     }

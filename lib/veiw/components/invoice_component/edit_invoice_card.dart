@@ -179,7 +179,21 @@ GetBuilder<RentInvoiceViewModel> buildinvoiceCard() {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          buildWirthSpace(0.01),
+                          buildWirthSpace(0.1),
+                          const Spacer(),
+                          AppText(
+                            txt: '41'.tr,
+                            size: Get.width * 0.045,
+                            fw: FontWeight.w800,
+                            color: AppColors.primaryColor,
+                          ),
+                          AppText(
+                            txt: ' ${controller.invoiceList[index].id} #',
+                            size: Get.width * 0.045,
+                            fw: FontWeight.w800,
+                            color: Colors.red,
+                          ),
+                          const Spacer(),
                           Container(
                             alignment: Alignment.center,
                             width: Get.width * 0.19,
@@ -200,20 +214,7 @@ GetBuilder<RentInvoiceViewModel> buildinvoiceCard() {
                               color: AppColors.backgroundColor,
                             ),
                           ),
-                          const Spacer(),
-                          AppText(
-                            txt: '41'.tr,
-                            size: Get.width * 0.045,
-                            fw: FontWeight.w800,
-                            color: AppColors.primaryColor,
-                          ),
-                          AppText(
-                            txt: ' ${controller.invoiceList[index].id} #',
-                            size: Get.width * 0.045,
-                            fw: FontWeight.w800,
-                            color: Colors.red,
-                          ),
-                          const Spacer(),
+                          buildWirthSpace(0.05)
                         ],
                       ),
                       const Divider(
@@ -311,13 +312,19 @@ GetBuilder<RentInvoiceViewModel> buildinvoiceCard() {
                       const Spacer(),
                       CustomButton9(
                           ontap: () {
-                            controller.addToList(
-                              controller.invoiceList[index],
-                            );
+                            if (controller.invoiceList[index].rent > 0) {
+                              controller.addToList(
+                                controller.invoiceList[index],
+                              );
 
-                            Get.back();
+                              Get.back();
+                            } else {
+                              Get.snackbar('خطئ', 'هذا الفاتورة مدفوعة نقدا');
+                            }
                           },
-                          txt: '55'.tr)
+                          txt: controller.invoiceList[index].rent > 0
+                              ? '55'.tr
+                              : 'مدفوعة')
                     ],
                   ),
                 ),

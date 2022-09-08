@@ -4,6 +4,7 @@ import 'package:new_app/models/customer_model.dart';
 import 'package:new_app/models/invoice_model.dart';
 import 'package:new_app/models/item_sql_model.dart';
 import 'package:new_app/models/items_model.dart';
+import 'package:new_app/models/rents_model.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -84,11 +85,32 @@ class MyDataBase {
       "rent_value" REAL NOT NULL
     )
     ''');
+    await db.execute(''' 
+    CREATE TABLE "rents" (
+      "id" INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
+      "date" TEXT NOT NULL , 
+      "invoiceId" INTEGER NOT NULL ,
+      "invoiceDate" TEXT NOT NULL ,
+      "totalInvoice" REAL NOT NULL ,
+      "customer" TEXT NOT NULL ,
+      "salesId" TEXT NOT NULL ,
+      "oldSalesId" TEXT NOT NULL ,
+      "company" TEXT NOT NULL ,
+      "payed" REAL NOT NULL ,
+      "totalPayed" REAL NOT NULL ,
+      "rent" REAL NOT NULL
+    )
+    ''');
   }
 
   Future<int> createinvoice(Invoice invoice) async {
     Database? mydb = await db;
     return mydb!.insert('invoices', invoice.toMap());
+  }
+
+  Future<int> createRents(RentsModel rent) async {
+    Database? mydb = await db;
+    return mydb!.insert('rents', rent.toMap());
   }
 
   Future<int> addProducts(ItemModel item) async {
@@ -117,6 +139,11 @@ class MyDataBase {
   Future<List<Map<String, Object?>>> getAllProducts() async {
     Database db = await intialDb();
     return db.query('invoices');
+  }
+
+  Future<List<Map<String, Object?>>> getAllRents() async {
+    Database db = await intialDb();
+    return db.query('rents');
   }
 
   Future<List<Map<String, Object?>>> getAllItem() async {

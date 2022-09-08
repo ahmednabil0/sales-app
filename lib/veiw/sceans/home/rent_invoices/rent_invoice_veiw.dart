@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:new_app/veiw/components/app_bar.dart';
 import 'package:new_app/veiw/components/back_ground.dart';
@@ -263,6 +264,10 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                       SizedBox(
                         width: Get.width * 0.5,
                         child: TextFormField(
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'\d*\.?\d*'))
+                          ],
                           controller: controller.willPayCont,
                           keyboardType: TextInputType.number,
                           validator: (value) {
@@ -276,11 +281,6 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                                     controller.willPayCont.text.trim()) >
                                 controller.confirmInvoiceList[0].rent) {
                               return 'big amount';
-                            }
-                            if (double.parse(
-                                    controller.willPayCont.text.trim()) <
-                                controller.confirmInvoiceList[0].rent) {
-                              return 'invalid amount';
                             }
 
                             return null;
@@ -296,7 +296,9 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                 CustomButton3(
                   ontap: () {
                     if (_key2.currentState!.validate()) {
-                      controller.addMoney();
+                      controller.addMoney(
+                        controller.confirmInvoiceList[0],
+                      );
                     }
                   },
                   txt: '28'.tr,
