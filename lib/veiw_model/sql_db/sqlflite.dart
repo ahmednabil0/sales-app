@@ -226,7 +226,7 @@ class MyDataBase {
     Database db = await intialDb();
     return db.update('invoices', map, where: 'id = ?', whereArgs: [id]);
   }
-//end
+// end
 
   // Future<int> clear() async {
   //   Database db = await intialDb();
