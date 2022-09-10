@@ -302,7 +302,8 @@ GetBuilder<RentInvoiceViewModel> buildinvoiceCard() {
                             color: AppColors.primaryColor,
                           ),
                           AppText(
-                            txt: controller.invoiceList[index].payed.toString(),
+                            txt: controller.invoiceList[index].payed
+                                .toStringAsFixed(2),
                             size: Get.width * 0.035,
                             fw: FontWeight.w800,
                             color: Colors.red,

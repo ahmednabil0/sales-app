@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/models/home_card_model.dart';
+import 'package:new_app/veiw/sceans/home/dailyes/daily_veiw.dart';
 import 'package:new_app/veiw/sceans/home/invoice/invoice.dart';
 import 'package:new_app/veiw/sceans/home/rent_invoices/rent_invoice_veiw.dart';
 import 'package:new_app/veiw/sceans/home/returns-invoices/return_invoice_veiw.dart';
@@ -8,7 +9,11 @@ import 'package:new_app/veiw/sceans/home/returns-invoices/return_invoice_veiw.da
 class Homedata {
   static List<HomeCardModel> homeList = [
     HomeCardModel(
-        type: '11'.tr, ontap: () {}, icon: Icons.backup_table_outlined),
+        type: '11'.tr,
+        ontap: () {
+          Get.to(() => const DailyVeiw());
+        },
+        icon: Icons.backup_table_outlined),
     HomeCardModel(
         type: '12'.tr,
         ontap: () {

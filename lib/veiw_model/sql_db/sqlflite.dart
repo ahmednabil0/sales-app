@@ -195,6 +195,20 @@ class MyDataBase {
       'rents',
     );
   }
+
+  Future<int> clearReturns() async {
+    Database? mydb = await db;
+    return mydb!.delete(
+      'returns',
+    );
+  }
+
+  Future<int> clearItemwReturns() async {
+    Database? mydb = await db;
+    return mydb!.delete(
+      'itemsReturns',
+    );
+  }
   //end
 
 // get data from data base
