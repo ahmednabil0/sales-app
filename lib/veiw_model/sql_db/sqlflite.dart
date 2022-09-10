@@ -4,6 +4,7 @@ import 'package:new_app/models/invoice_model.dart';
 import 'package:new_app/models/item_sql_model.dart';
 import 'package:new_app/models/items_model.dart';
 import 'package:new_app/models/rents_model.dart';
+import 'package:new_app/models/return.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -66,6 +67,17 @@ class MyDataBase {
     )
     ''');
     await db.execute(''' 
+    CREATE TABLE "itemsReturns" (
+      "id" INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT ,
+      "invoiceId" INTEGER  NOT NULL ,
+      "itemId" INTEGER  NOT NULL ,
+      "name" TEXT NOT NULL , 
+      "price" REAL NOT NULL ,
+      "unit" TEXT NOT NULL ,
+      "quntity" INTEGER NOT NULL
+    )
+    ''');
+    await db.execute(''' 
     CREATE TABLE "itemsoffline" (
       "companyId" INTEGER NOT NULL ,
       "companyName" TEXT NOT NULL ,
@@ -105,6 +117,18 @@ class MyDataBase {
       "rent" REAL NOT NULL
     )
     ''');
+    await db.execute(''' 
+    CREATE TABLE "returns" (
+      "id" INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
+      "date" TEXT NOT NULL , 
+      "customer" TEXT NOT NULL ,
+      "salesId" TEXT NOT NULL ,
+      "company" TEXT NOT NULL ,
+      "total" REAL NOT NULL ,
+      "uploaded" INTEGER NOT NULL ,
+      "vat" REAL NOT NULL 
+    )
+    ''');
   }
 //end
 
@@ -120,6 +144,11 @@ class MyDataBase {
     return mydb!.insert('rents', rent.toMap());
   }
 
+  Future<int> createRrturns(ReturnModel returns) async {
+    Database? mydb = await db;
+    return mydb!.insert('returns', returns.toMap());
+  }
+
   Future<int> addProducts(ItemModel item) async {
     Database? mydb = await db;
     return mydb!.insert('itemsoffline', item.toMap());
@@ -133,6 +162,13 @@ class MyDataBase {
   Future<int> createitems(ItemSqlmodel item) async {
     Database? mydb = await db;
     int response = await mydb!.insert('items', item.toMap());
+    return response;
+  }
+
+  Future<int> createitemsReturns(ItemSqlmodel item) async {
+    Database? mydb = await db;
+    int response = await mydb!.insert('itemsReturns', item.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
     return response;
   }
 //end
@@ -168,9 +204,19 @@ class MyDataBase {
     return db.query('invoices');
   }
 
+  Future<List<Map<String, Object?>>> getAllPItemsReturns() async {
+    Database db = await intialDb();
+    return db.query('itemsReturns');
+  }
+
   Future<List<Map<String, Object?>>> getAllRents() async {
     Database db = await intialDb();
     return db.query('rents');
+  }
+
+  Future<List<Map<String, Object?>>> getAllReturns() async {
+    Database db = await intialDb();
+    return db.query('returns');
   }
 
   Future<List<Map<String, Object?>>> getAllItem() async {
@@ -193,9 +239,20 @@ class MyDataBase {
     return db.query('items', where: 'invoiceId = ?', whereArgs: [invoiceId]);
   }
 
+  Future<List<Map<String, Object?>>> getPurRetrns(int invoiceId) async {
+    Database db = await intialDb();
+    return db
+        .query('itemsReturns', where: 'invoiceId = ?', whereArgs: [invoiceId]);
+  }
+
   Future<List<Map<String, Object?>>> getofflineItems(int uploaded) async {
     Database db = await intialDb();
     return db.query('invoices', where: 'uploaded = ?', whereArgs: [uploaded]);
+  }
+
+  Future<List<Map<String, Object?>>> getofflineReturns(int uploaded) async {
+    Database db = await intialDb();
+    return db.query('returns', where: 'uploaded = ?', whereArgs: [uploaded]);
   }
 
 //end
@@ -225,6 +282,11 @@ class MyDataBase {
   Future<int> update(int id, Map<String, Object> map) async {
     Database db = await intialDb();
     return db.update('invoices', map, where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<int> updateReturn(int id, Map<String, Object> map) async {
+    Database db = await intialDb();
+    return db.update('returns', map, where: 'id = ?', whereArgs: [id]);
   }
 // end
 

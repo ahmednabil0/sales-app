@@ -4,20 +4,15 @@ import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:new_app/main.dart';
 import 'package:new_app/models/customer_model.dart';
-import 'package:new_app/models/invoice_model.dart';
+import 'package:new_app/models/firebase_reurn_model.dart';
 import 'package:new_app/models/item_sql_model.dart';
 import 'package:new_app/models/items_model.dart';
-import 'package:new_app/models/online_invoice_model.dart';
+import 'package:new_app/models/return.dart';
 import 'package:new_app/veiw/sceans/home/invoice/completed_veiw.dart';
 import 'package:new_app/veiw_model/functions/ckeck_internet.dart';
-import 'package:new_app/veiw_model/invoces/offline_invoices.dart';
 import 'package:new_app/veiw_model/sql_db/sqlflite.dart';
 
-class InvoiceVeiwModel extends GetxController {
-  TextEditingController quntityCont = TextEditingController();
-  TextEditingController deliveryCont = TextEditingController();
-  TextEditingController payedCont = TextEditingController();
-  TextEditingController rentCont = TextEditingController();
+class ReturnIvoiceVeiwModel extends GetxController {
   TextEditingController vatCont = TextEditingController();
 
   // get customers data
@@ -35,6 +30,25 @@ class InvoiceVeiwModel extends GetxController {
           await db.addCustomers(CustomerModel.fromMap(i));
         }
       });
+    }
+    update();
+  }
+
+  void add(int i) {
+    itemList[i].quntity++;
+    update();
+  }
+
+  void sub(int i) {
+    if (itemList[i].quntity > 1) {
+      itemList[i].quntity--;
+    }
+    update();
+  }
+
+  void addItem(var i) {
+    if (!selectedList.contains(i)) {
+      selectedList.add(i);
     }
     update();
   }
@@ -61,7 +75,7 @@ class InvoiceVeiwModel extends GetxController {
   //start
   List<ItemModel> itemList = [];
   List<ItemModel> selectedList = [];
-
+  final MyDataBase db = MyDataBase();
   CollectionReference itemsRef =
       FirebaseFirestore.instance.collection('products');
   Future<void> getItemData() async {
@@ -92,25 +106,6 @@ class InvoiceVeiwModel extends GetxController {
   }
 
   //end
-  void add(int i) {
-    itemList[i].quntity++;
-    update();
-  }
-
-  void sub(int i) {
-    if (itemList[i].quntity > 1) {
-      itemList[i].quntity--;
-    }
-    update();
-  }
-
-  void addItem(var i) {
-    if (!selectedList.contains(i)) {
-      selectedList.add(i);
-    }
-    update();
-  }
-
   void clear() {
     selectedList.clear();
     update();
@@ -123,40 +118,22 @@ class InvoiceVeiwModel extends GetxController {
       for (ItemModel element in selectedList) {
         total = total + (element.price * element.quntity);
       }
-      total = total +
-          double.parse(deliveryCont.text) +
-          (double.parse(vatCont.text) * total);
+      total = total - (double.parse(vatCont.text) * total);
+      total = double.parse(total.toStringAsFixed(2));
     }
     update();
   }
 
-  //sql
-  //start
-  MyDataBase db = MyDataBase();
-
-  Future<int> insertInvoice(Invoice invoice) async {
-    int i = await db.createinvoice(invoice);
-    return i;
+  showCircular() {
+    Get.defaultDialog(
+        barrierDismissible: false,
+        title: '',
+        content: const LinearProgressIndicator());
   }
 
   Future<void> insertItem(ItemSqlmodel item) async {
-    await db.createitems(item);
+    await db.createitemsReturns(item);
   }
-
-  Future<void> getAll() async {
-    List list1 = await db.getAllProducts();
-    List list2 = await db.getAllItems();
-    // ignore: avoid_print
-    print(list1);
-    // ignore: avoid_print
-    print(list2);
-  }
-
-  void deltaa() async {
-    db.myDelete();
-  }
-
-  //end
 
   Future<void> addItemsDb(int num) async {
     for (var i in selectedList) {
@@ -170,45 +147,39 @@ class InvoiceVeiwModel extends GetxController {
     }
   }
 
-  showCircular() {
-    Get.defaultDialog(
-        barrierDismissible: false,
-        title: '',
-        content: const LinearProgressIndicator());
+  Future<int> insertInvoice(ReturnModel invoice) async {
+    int i = await db.createRrturns(invoice);
+    return i;
   }
 
-  void clearContent() {
-    selectedList.clear();
-    intailData = null;
-    vatCont.text = '0.0';
-    deliveryCont.text = '0.0';
-    total = 0.0;
-    update();
+  Future<void> getAll() async {
+    List list1 = await db.getAllReturns();
+    List list2 = await db.getAllPItemsReturns();
+    // ignore: avoid_print
+    print(list1);
+    // ignore: avoid_print
+    print(list2);
   }
 
   //upload invoice
   //stert
   bool? internet;
   CollectionReference invoicesRef =
-      FirebaseFirestore.instance.collection('invoices');
+      FirebaseFirestore.instance.collection('returns');
   Future<void> uploadInvoice() async {
     internet = await ckeckInternet();
     // ignore: avoid_print
     print(internet);
     if (internet == false) {
       int i = await insertInvoice(
-        Invoice(
-          date: dateTime!,
-          dueDate: dueDate!,
-          total: total,
-          customerName: intailData!,
+        ReturnModel(
+          date: dateCont.text,
+          customer: intailData!,
           salesId: sharedpref!.getString('id')!,
           company: sharedpref!.getString('company')!,
-          uploaded: 0,
-          delivery: double.parse(deliveryCont.text),
+          total: total,
           vat: double.parse(vatCont.text),
-          payed: double.parse(payedCont.text),
-          rent: double.parse(rentCont.text),
+          uploaded: 0,
         ),
       );
       await addItemsDb(i);
@@ -218,36 +189,28 @@ class InvoiceVeiwModel extends GetxController {
     }
     if (internet == true) {
       int i = await insertInvoice(
-        Invoice(
-          date: dateTime!,
-          dueDate: dueDate!,
-          total: total,
-          customerName: intailData!,
+        ReturnModel(
+          date: dateCont.text,
+          customer: intailData!,
           salesId: sharedpref!.getString('id')!,
           company: sharedpref!.getString('company')!,
-          uploaded: 1,
-          delivery: double.parse(deliveryCont.text),
+          total: total,
           vat: double.parse(vatCont.text),
-          payed: double.parse(payedCont.text),
-          rent: double.parse(rentCont.text),
+          uploaded: 1,
         ),
       );
       await addItemsDb(i);
       List myList = await getSpecficItem(i);
-      await invoicesRef.doc().set(FirebaseInvoiceModel(
+      await invoicesRef.doc().set(FirebaseReturnModel(
             id: i,
-            date: dateTime!,
-            dueDate: dueDate!,
-            total: total,
-            customerName: intailData!,
+            date: dateCont.text,
+            customer: intailData!,
             salesId: sharedpref!.getString('id')!,
             company: sharedpref!.getString('company')!,
+            total: total,
+            vat: double.parse(vatCont.text),
             uploaded: 1,
             items: myList,
-            delivery: double.parse(deliveryCont.text),
-            payed: double.parse(payedCont.text),
-            rent: double.parse(rentCont.text),
-            vat: double.parse(vatCont.text),
           ).toMap());
 
       clearContent();
@@ -255,19 +218,24 @@ class InvoiceVeiwModel extends GetxController {
     }
   }
 
-  // end
+  void clearContent() {
+    selectedList.clear();
+    intailData = null;
+    vatCont.text = '0.0';
+    total = 0.0;
+    update();
+  }
+
   Future<List> getSpecficItem(int id) async {
-    List itemlista = await db.getPurItems(id);
+    List itemlista = await db.getPurRetrns(id);
     return itemlista;
   }
 
   String? dateTime;
   String? dueDate;
   final TextEditingController dateCont = TextEditingController();
-  OffLineInvoices instance = OffLineInvoices();
   @override
   void onInit() async {
-    instance.upload();
     DateTime date = DateTime.now();
     dateTime = Jiffy(date).format("yyyy/MM/dd");
     DateTime due = DateTime.now().add(const Duration(days: 7));
@@ -277,8 +245,61 @@ class InvoiceVeiwModel extends GetxController {
     await getCustomerData();
     await getItemData();
     await getProductsData();
-    deliveryCont.text = '0.0';
     vatCont.text = '0.0';
+    await getOfflineInvoices();
+    await upload();
     super.onInit();
   }
+
+  //upload offline
+  //start
+  List<ReturnModel> offline = [];
+  List<Map> ofllinList = [];
+  Future<void> getOfflineInvoices() async {
+    List myList = await db.getofflineReturns(0);
+    offline = [];
+    for (var i in myList) {
+      offline.add(ReturnModel.fromMap(i));
+    }
+    ofllinList = [];
+    for (var i in offline) {
+      List list = await db.getPurRetrns(i.id!);
+      ofllinList.add({'returns': i, 'items': list});
+    }
+    update();
+  }
+
+  Future<void> updateInvoce(int id) async {
+    db.updateReturn(id, {"uploaded": 1});
+  }
+
+  Future<void> deleteItem(int id) async {
+    db.deleteItem(id);
+  }
+
+  upload() async {
+    internet = await ckeckInternet();
+    if (internet == true) {
+      if (ofllinList.isNotEmpty) {
+        for (var i in ofllinList) {
+          await invoicesRef.doc().set(FirebaseReturnModel(
+                  id: i['returns'].id,
+                  date: i['returns'].date,
+                  customer: i['returns'].customer,
+                  salesId: i['returns'].salesId,
+                  company: i['returns'].company,
+                  total: i['returns'].total,
+                  vat: i['returns'].vat,
+                  uploaded: 1,
+                  items: i['items'])
+              .toMap());
+          updateInvoce(i['returns'].id);
+          // deleteItem(i['invoice'].id);
+        }
+        ofllinList.clear();
+      }
+    }
+    update();
+  }
+  //end
 }

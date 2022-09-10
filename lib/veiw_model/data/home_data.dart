@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:new_app/models/home_card_model.dart';
 import 'package:new_app/veiw/sceans/home/invoice/invoice.dart';
 import 'package:new_app/veiw/sceans/home/rent_invoices/rent_invoice_veiw.dart';
+import 'package:new_app/veiw/sceans/home/returns-invoices/return_invoice_veiw.dart';
 
 class Homedata {
   static List<HomeCardModel> homeList = [
@@ -20,7 +21,12 @@ class Homedata {
           Get.to(() => RentInvoiceVeiw());
         },
         icon: Icons.move_to_inbox_sharp),
-    HomeCardModel(type: '14'.tr, ontap: () {}, icon: Icons.backup_outlined),
+    HomeCardModel(
+        type: '14'.tr,
+        ontap: () {
+          Get.to(() => ReturnInvoiceVeiw());
+        },
+        icon: Icons.backup_outlined),
     HomeCardModel(
         type: '15'.tr, ontap: () {}, icon: Icons.content_paste_go_outlined),
     HomeCardModel(
