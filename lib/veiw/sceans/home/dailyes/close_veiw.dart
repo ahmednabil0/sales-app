@@ -12,7 +12,7 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
   CloseDailyVeiw({super.key});
   @override
   final controller = Get.put(DailyVeiwModel());
-
+//sdjfdhf
   @override
   Widget build(BuildContext context) {
     return Scaffold(
