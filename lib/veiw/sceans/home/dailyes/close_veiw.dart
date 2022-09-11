@@ -12,98 +12,99 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
   CloseDailyVeiw({super.key});
   @override
   final controller = Get.put(DailyVeiwModel());
-//sdjfdhf
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: createBackGroundHome(
         child: SafeArea(
-          child: Column(
-            children: [
-              buildAppBar(txt: '63'.tr),
-              buildHeightSpace(0.01),
-              Row(
-                children: [
-                  buildWirthSpace(0.02),
-                  AppText(
-                    txt: '12'.tr,
-                    size: Get.width * 0.05,
-                    fw: FontWeight.bold,
-                    color: AppColors.primaryColor,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                buildAppBar(txt: '63'.tr),
+                buildHeightSpace(0.01),
+                Row(
+                  children: [
+                    buildWirthSpace(0.02),
+                    AppText(
+                      txt: '12'.tr,
+                      size: Get.width * 0.05,
+                      fw: FontWeight.bold,
+                      color: AppColors.primaryColor,
+                    ),
+                  ],
+                ),
+                buildInvoiceCard(),
+                buildHeightSpace(0.02),
+                Row(
+                  children: [
+                    buildWirthSpace(0.02),
+                    AppText(
+                      txt: '13'.tr,
+                      size: Get.width * 0.05,
+                      fw: FontWeight.bold,
+                      color: Colors.red,
+                    ),
+                  ],
+                ),
+                buildRentCard(),
+                buildHeightSpace(0.02),
+                Row(
+                  children: [
+                    buildWirthSpace(0.02),
+                    AppText(
+                      txt: '14'.tr,
+                      size: Get.width * 0.05,
+                      fw: FontWeight.bold,
+                      color: AppColors.primaryColor,
+                    ),
+                  ],
+                ),
+                buildReturnCard(),
+                buildHeightSpace(0.12),
+                Container(
+                  height: Get.width * 0.1,
+                  width: Get.width * 0.9,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Get.width * 0.065),
+                    color: Colors.red.withOpacity(
+                      0.9,
+                    ),
                   ),
-                ],
-              ),
-              buildInvoiceCard(),
-              buildHeightSpace(0.02),
-              Row(
-                children: [
-                  buildWirthSpace(0.02),
-                  AppText(
-                    txt: '13'.tr,
-                    size: Get.width * 0.05,
-                    fw: FontWeight.bold,
-                    color: Colors.red,
-                  ),
-                ],
-              ),
-              buildRentCard(),
-              buildHeightSpace(0.02),
-              Row(
-                children: [
-                  buildWirthSpace(0.02),
-                  AppText(
-                    txt: '14'.tr,
-                    size: Get.width * 0.05,
-                    fw: FontWeight.bold,
-                    color: AppColors.primaryColor,
-                  ),
-                ],
-              ),
-              buildReturnCard(),
-              buildHeightSpace(0.12),
-              Container(
-                height: Get.width * 0.15,
-                width: Get.width * 0.97,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Get.width * 0.065),
-                  color: Colors.red.withOpacity(
-                    0.9,
+                  child: GetBuilder<DailyVeiwModel>(
+                    builder: (controller) => Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        AppText(
+                          txt: '${'12'.tr} : ${controller.invoiceList.length}',
+                          size: Get.width * 0.045,
+                          fw: FontWeight.bold,
+                          color: AppColors.backgroundColor,
+                        ),
+                        AppText(
+                          txt: '${'13'.tr} : ${controller.rentsList.length}',
+                          size: Get.width * 0.045,
+                          fw: FontWeight.bold,
+                          color: AppColors.backgroundColor,
+                        ),
+                        AppText(
+                          txt: '${'14'.tr} : ${controller.returnsList.length}',
+                          size: Get.width * 0.045,
+                          fw: FontWeight.bold,
+                          color: AppColors.backgroundColor,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                child: GetBuilder<DailyVeiwModel>(
-                  builder: (controller) => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      AppText(
-                        txt: '${'12'.tr} : ${controller.invoiceList.length}',
-                        size: Get.width * 0.05,
-                        fw: FontWeight.bold,
-                        color: AppColors.backgroundColor,
-                      ),
-                      AppText(
-                        txt: '${'13'.tr} : ${controller.rentsList.length}',
-                        size: Get.width * 0.05,
-                        fw: FontWeight.bold,
-                        color: AppColors.backgroundColor,
-                      ),
-                      AppText(
-                        txt: '${'14'.tr} : ${controller.returnsList.length}',
-                        size: Get.width * 0.05,
-                        fw: FontWeight.bold,
-                        color: AppColors.backgroundColor,
-                      ),
-                    ],
-                  ),
+                buildHeightSpace(0.02),
+                CustomButton3(
+                  ontap: () {
+                    controller.closeDaily();
+                  },
+                  txt: '63'.tr,
                 ),
-              ),
-              buildHeightSpace(0.1),
-              CustomButton3(
-                ontap: () {
-                  controller.closeDaily();
-                },
-                txt: '63'.tr,
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -112,7 +113,8 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
 
   SizedBox buildReturnCard() {
     return SizedBox(
-      height: Get.width * 0.28,
+      height:
+          controller.returnsList.isEmpty ? Get.width * 0.08 : Get.width * 0.28,
       child: GetBuilder<DailyVeiwModel>(
         builder: (controller) => controller.returnsList.isEmpty
             ? Center(
@@ -257,7 +259,8 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
 
   SizedBox buildRentCard() {
     return SizedBox(
-      height: Get.width * 0.28,
+      height:
+          controller.rentsList.isEmpty ? Get.width * 0.08 : Get.width * 0.28,
       child: GetBuilder<DailyVeiwModel>(
         builder: (controller) => controller.rentsList.isEmpty
             ? Center(
@@ -413,7 +416,8 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
 
   SizedBox buildInvoiceCard() {
     return SizedBox(
-      height: Get.width * 0.28,
+      height:
+          controller.invoiceList.isEmpty ? Get.width * 0.08 : Get.width * 0.28,
       child: GetBuilder<DailyVeiwModel>(
         builder: (controller) => controller.invoiceList.isEmpty
             ? Center(

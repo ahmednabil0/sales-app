@@ -41,25 +41,25 @@ class HomeVeiw extends StatelessWidget {
                 AppTextWidgtt(
                   txt: '10'.tr,
                   txt2: 'customer name',
-                  size: Get.width * 0.05,
+                  size: Get.width * 0.04,
                   fw: FontWeight.bold,
                   color: AppColors.primaryColor.withOpacity(0.69),
                 ),
                 SizedBox(
-                  height: Get.width * 0.04,
+                  height: Get.width * 0.02,
                 ),
                 SizedBox(
                   height: Get.height * 0.78,
                   child: Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: Get.width * 0.075),
+                        EdgeInsets.symmetric(horizontal: Get.width * 0.055),
                     child: GridView.builder(
                       physics: const BouncingScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: Get.width * 0.07,
                           mainAxisSpacing: Get.width * 0.05,
-                          childAspectRatio: Get.width * 0.3 / Get.width * 2.9),
+                          childAspectRatio: Get.width * 0.35 / Get.width * 3.1),
                       itemCount: Homedata.homeList.length,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int i) {
@@ -84,7 +84,7 @@ class HomeVeiw extends StatelessWidget {
                                 Icon(
                                   Homedata.homeList[i].icon,
                                   color: AppColors.primaryColor,
-                                  size: Get.width * 0.15,
+                                  size: Get.width * 0.135,
                                 ),
                                 SizedBox(
                                   height: Get.width * 0.025,

@@ -166,9 +166,9 @@ GetBuilder<RentInvoiceViewModel> buildinvoiceCard() {
             itemCount: controller.invoiceList.length,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
-                padding: EdgeInsets.symmetric(vertical: Get.width * 0.05),
+                padding: EdgeInsets.symmetric(vertical: Get.width * 0.02),
                 child: Container(
-                  width: Get.width * 0.9,
+                  width: Get.width * 0.95,
                   height: Get.width * 0.4,
                   decoration: BoxDecoration(
                     border: Border.all(width: 2, color: AppColors.primaryColor),

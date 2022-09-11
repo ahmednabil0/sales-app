@@ -175,7 +175,7 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                                               AppText(
                                                 txt: controller
                                                     .confirmInvoiceList[0].total
-                                                    .toString(),
+                                                    .toStringAsFixed(2),
                                                 size: Get.width * 0.035,
                                                 fw: FontWeight.w800,
                                                 color: Colors.red,
@@ -189,7 +189,7 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                                               AppText(
                                                 txt: controller
                                                     .confirmInvoiceList[0].payed
-                                                    .toString(),
+                                                    .toStringAsFixed(2),
                                                 size: Get.width * 0.035,
                                                 fw: FontWeight.w800,
                                                 color: Colors.red,

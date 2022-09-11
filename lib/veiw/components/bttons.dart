@@ -351,7 +351,7 @@ class CustomButton9 extends StatelessWidget {
       onTap: ontap,
       child: Container(
         alignment: Alignment.center,
-        width: Get.width * 0.97,
+        width: Get.width * 0.9,
         height: Get.width * 0.1,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
