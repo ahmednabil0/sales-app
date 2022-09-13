@@ -37,14 +37,14 @@ class DailyVeiw extends StatelessWidget {
             SizedBox(
               height: Get.width * 0.025,
             ),
-            CustomButton3(
-              ontap: () {
-                Get.to(
-                  () => null,
-                );
-              },
-              txt: '64'.tr,
-            ),
+            // CustomButton3(
+            //   ontap: () {
+            //     // Get.to(
+            //     //   () => null,
+            //     // );
+            //   },
+            //   txt: '64'.tr,
+            // ),
             SizedBox(
               height: Get.width * 0.025,
             ),

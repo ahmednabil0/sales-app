@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/main.dart';
 import 'package:new_app/veiw/components/back_ground.dart';
 import 'package:new_app/veiw/components/bttons.dart';
 import 'package:new_app/veiw/components/custom_text.dart';
@@ -68,7 +67,6 @@ class SignVeiw extends GetWidget<LoginVeiwModel> {
                         txt: '1'.tr,
                         ontap: () async {
                           if (_key.currentState!.validate()) {
-                            sharedpref!.setString('company', 'company1');
                             await controller.signIn(
                               userCont.text,
                               passCont.text,

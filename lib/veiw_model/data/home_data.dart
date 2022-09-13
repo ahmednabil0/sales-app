@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:new_app/models/home_card_model.dart';
 import 'package:new_app/veiw/sceans/home/dailyes/daily_veiw.dart';
 import 'package:new_app/veiw/sceans/home/invoice/invoice.dart';
+import 'package:new_app/veiw/sceans/home/quntities_convert/appliacnt_quntity_veiw.dart';
 import 'package:new_app/veiw/sceans/home/rent_invoices/rent_invoice_veiw.dart';
 import 'package:new_app/veiw/sceans/home/returns-invoices/return_invoice_veiw.dart';
 
@@ -33,7 +34,11 @@ class Homedata {
         },
         icon: Icons.backup_outlined),
     HomeCardModel(
-        type: '15'.tr, ontap: () {}, icon: Icons.content_paste_go_outlined),
+        type: '15'.tr,
+        ontap: () {
+          Get.to(() => AplicantQuantityVeiw());
+        },
+        icon: Icons.content_paste_go_outlined),
     HomeCardModel(
         type: '16'.tr, ontap: () {}, icon: Icons.check_circle_outlined),
   ];

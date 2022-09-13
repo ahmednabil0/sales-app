@@ -10,7 +10,6 @@ import 'package:new_app/models/items_model.dart';
 import 'package:new_app/models/online_invoice_model.dart';
 import 'package:new_app/veiw/sceans/home/invoice/completed_veiw.dart';
 import 'package:new_app/veiw_model/functions/ckeck_internet.dart';
-import 'package:new_app/veiw_model/invoces/offline_invoices.dart';
 import 'package:new_app/veiw_model/sql_db/sqlflite.dart';
 
 class InvoiceVeiwModel extends GetxController {
@@ -256,6 +255,67 @@ class InvoiceVeiwModel extends GetxController {
   }
 
   // end
+
+  // send offline invoices
+  //start
+  List<Invoice> offline = [];
+  List<Map> ofllinList = [];
+  Future<void> getOfflineInvoices() async {
+    List myList = await db.getofflineItems(0);
+    offline = [];
+    for (var i in myList) {
+      offline.add(Invoice.fromMap(i));
+    }
+    ofllinList = [];
+    for (var i in offline) {
+      List list = await db.getPurItems(i.id!);
+      ofllinList.add({'invoice': i, 'items': list});
+    }
+    update();
+  }
+
+  Future<void> updateInvoce(int id) async {
+    db.update(id, {"uploaded": 1});
+  }
+
+  Future<void> deleteItem(int id) async {
+    db.deleteItem(id);
+  }
+
+  CollectionReference ofinvoicesRef =
+      FirebaseFirestore.instance.collection('invoices');
+  bool? internetc;
+  upload() async {
+    internetc = await ckeckInternet();
+    if (internetc == true) {
+      if (ofllinList.isNotEmpty) {
+        for (var i in ofllinList) {
+          await ofinvoicesRef.doc().set(FirebaseInvoiceModel(
+                id: i['invoice'].id,
+                date: i['invoice'].date,
+                dueDate: i['invoice'].dueDate,
+                total: i['invoice'].total,
+                customerName: i['invoice'].customerName,
+                salesId: sharedpref!.getString('id')!,
+                company: sharedpref!.getString('company')!,
+                uploaded: 1,
+                items: i['items'],
+                delivery: i['invoice'].delivery,
+                vat: i['invoice'].vat,
+                payed: i['invoice'].payed,
+                rent: i['invoice'].rent,
+              ).toMap());
+          updateInvoce(i['invoice'].id);
+          // deleteItem(i['invoice'].id);
+        }
+        // print('00000000000000000000');
+        ofllinList.clear();
+      }
+    }
+    update();
+  }
+  //end
+
   Future<List> getSpecficItem(int id) async {
     List itemlista = await db.getPurItems(id);
     return itemlista;
@@ -264,10 +324,10 @@ class InvoiceVeiwModel extends GetxController {
   String? dateTime;
   String? dueDate;
   final TextEditingController dateCont = TextEditingController();
-  OffLineInvoices instance = OffLineInvoices();
   @override
   void onInit() async {
-    instance.upload();
+    await getOfflineInvoices();
+    await upload();
     DateTime date = DateTime.now();
     dateTime = Jiffy(date).format("yyyy/MM/dd");
     DateTime due = DateTime.now().add(const Duration(days: 7));

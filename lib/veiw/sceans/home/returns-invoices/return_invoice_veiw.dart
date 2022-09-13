@@ -40,14 +40,14 @@ class ReturnInvoiceVeiw extends GetWidget<ReturnIvoiceVeiwModel> {
             SizedBox(
               height: Get.width * 0.025,
             ),
-            CustomButton3(
-              ontap: () {
-                Get.to(
-                  () => null,
-                );
-              },
-              txt: '62'.tr,
-            ),
+            // CustomButton3(
+            //   ontap: () {
+            //     Get.to(
+            //       () => null,
+            //     );
+            //   },
+            //   txt: '62'.tr,
+            // ),
             SizedBox(
               height: Get.width * 0.025,
             ),

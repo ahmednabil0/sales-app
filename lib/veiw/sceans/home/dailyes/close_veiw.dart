@@ -113,8 +113,7 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
 
   SizedBox buildReturnCard() {
     return SizedBox(
-      height:
-          controller.returnsList.isEmpty ? Get.width * 0.08 : Get.width * 0.28,
+      height: Get.width * 0.28,
       child: GetBuilder<DailyVeiwModel>(
         builder: (controller) => controller.returnsList.isEmpty
             ? Center(
@@ -259,8 +258,7 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
 
   SizedBox buildRentCard() {
     return SizedBox(
-      height:
-          controller.rentsList.isEmpty ? Get.width * 0.08 : Get.width * 0.28,
+      height: Get.width * 0.28,
       child: GetBuilder<DailyVeiwModel>(
         builder: (controller) => controller.rentsList.isEmpty
             ? Center(
@@ -416,8 +414,7 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
 
   SizedBox buildInvoiceCard() {
     return SizedBox(
-      height:
-          controller.invoiceList.isEmpty ? Get.width * 0.08 : Get.width * 0.28,
+      height: Get.width * 0.28,
       child: GetBuilder<DailyVeiwModel>(
         builder: (controller) => controller.invoiceList.isEmpty
             ? Center(

@@ -65,6 +65,8 @@ class LoginVeiwModel extends GetxController {
       if (result != null) {
         sharedpref!.remove('id');
         sharedpref!.setString('id', FirebaseAuth.instance.currentUser!.uid);
+        sharedpref!.setString('company', 'company1');
+        sharedpref!.setInt('companyId', 125654554);
         Get.snackbar('Ok', 'sucess Sign in');
         Get.off(() => HomeVeiw(
               admin: email,

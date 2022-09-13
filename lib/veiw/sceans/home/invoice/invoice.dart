@@ -5,8 +5,6 @@ import 'package:new_app/veiw/components/app_bar.dart';
 import 'package:new_app/veiw/components/back_ground.dart';
 import 'package:new_app/veiw/components/bttons.dart';
 import 'package:new_app/veiw/sceans/home/invoice/create_invoice.dart';
-import 'package:new_app/veiw/sceans/home/invoice/edit_invoice_veiw.dart';
-import 'package:new_app/veiw/sceans/home/invoice/offline_invoices_veiw.dart';
 import 'package:new_app/veiw_model/invoces/create_invoice_veiw_model.dart';
 
 class InvoiceVeiw extends GetWidget<InvoiceVeiwModel> {
@@ -42,22 +40,18 @@ class InvoiceVeiw extends GetWidget<InvoiceVeiwModel> {
             SizedBox(
               height: Get.width * 0.025,
             ),
-            CustomButton3(
-              ontap: () {
-                Get.to(
-                  () => EditInvoiceVeiw(),
-                );
-              },
-              txt: '18'.tr,
-            ),
-            SizedBox(
-              height: Get.width * 0.025,
-            ),
-            CustomButton3(
-                ontap: () {
-                  Get.to(() => OfflineInvoicesVeiw());
-                },
-                txt: '19'.tr),
+            // CustomButton3(
+            //   ontap: () {
+            //     Get.to(
+            //       () => EditInvoiceVeiw(),
+            //     );
+            //   },
+            //   txt: '18'.tr,
+            // ),
+            // SizedBox(
+            //   height: Get.width * 0.025,
+            // ),
+            // CustomButton3(ontap: () {}, txt: '19'.tr),
           ],
         ),
       )),

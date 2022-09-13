@@ -111,6 +111,38 @@ InkWell buildItemHeaderthr(InvoiceVeiwModel controller) {
   );
 }
 
+InkWell buildItemHeaderBr() {
+  return InkWell(
+    onTap: () {
+      Get.back();
+    },
+    child: Padding(
+      padding: EdgeInsets.symmetric(horizontal: Get.width * 0.04, vertical: 1),
+      child: Container(
+        height: Get.width * 0.13,
+        decoration: BoxDecoration(
+          color: AppColors.primaryColor,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(Get.width * 0.07),
+            bottomRight: Radius.circular(Get.width * 0.07),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppText(
+              txt: '28'.tr,
+              size: Get.width * 0.05,
+              fw: FontWeight.bold,
+              color: AppColors.backgroundColor,
+            )
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
 InkWell buildItemHeaderRe(ReturnIvoiceVeiwModel controller) {
   return InkWell(
     onTap: () {
