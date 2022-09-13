@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -118,16 +120,22 @@ class QuantitiesVeiwModel extends GetxController {
   }
 
   CollectionReference ref = FirebaseFirestore.instance.collection('applicants');
+
   Future<void> sendData() async {
     List list = [];
-    selectedList.forEach((element) {
+    for (var element in selectedList) {
       list.add(element.toMap());
-    });
+    }
     showCircular();
     DateTime date = DateTime.now();
     String dateTime = Jiffy(date).format('MM/dd/yyyy hh:mm:ss a');
+    Random random = Random();
+    int min = 10;
+    int max = 100000000000000000;
 
+    int result = min + random.nextInt(max - min);
     await ref.doc().set({
+      'id': result,
       "date": dateTime,
       "salesId": sharedpref!.getString('id'),
       "items": list,

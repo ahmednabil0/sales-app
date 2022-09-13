@@ -6,6 +6,7 @@ import 'package:new_app/veiw/sceans/home/invoice/invoice.dart';
 import 'package:new_app/veiw/sceans/home/quntities_convert/appliacnt_quntity_veiw.dart';
 import 'package:new_app/veiw/sceans/home/rent_invoices/rent_invoice_veiw.dart';
 import 'package:new_app/veiw/sceans/home/returns-invoices/return_invoice_veiw.dart';
+import 'package:new_app/veiw/sceans/home/quntities_convert/receive_quntity_veiw.dart';
 
 class Homedata {
   static List<HomeCardModel> homeList = [
@@ -40,6 +41,10 @@ class Homedata {
         },
         icon: Icons.content_paste_go_outlined),
     HomeCardModel(
-        type: '16'.tr, ontap: () {}, icon: Icons.check_circle_outlined),
+        type: '16'.tr,
+        ontap: () {
+          Get.to(() => ReceiveQuntityVeiw());
+        },
+        icon: Icons.check_circle_outlined),
   ];
 }
