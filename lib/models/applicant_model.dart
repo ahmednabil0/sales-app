@@ -4,8 +4,12 @@ class ApplicantModel {
   String company;
   int companyId;
   DateTime dateDetails;
+  DateTime deliverDate;
+  DateTime receivedDate;
   String date;
   bool delivered;
+  bool delivering;
+  bool received;
   String from;
   String to;
   List items;
@@ -16,8 +20,12 @@ class ApplicantModel {
     required this.company,
     required this.companyId,
     required this.dateDetails,
+    required this.deliverDate,
+    required this.receivedDate,
     required this.date,
     required this.delivered,
+    required this.delivering,
+    required this.received,
     required this.from,
     required this.to,
     required this.items,
@@ -32,8 +40,12 @@ class ApplicantModel {
     result.addAll({'company': company});
     result.addAll({'companyId': companyId});
     result.addAll({'dateDetails': dateDetails.millisecondsSinceEpoch});
+    result.addAll({'deliverDate': deliverDate.millisecondsSinceEpoch});
+    result.addAll({'receivedDate': receivedDate.millisecondsSinceEpoch});
     result.addAll({'date': date});
     result.addAll({'delivered': delivered});
+    result.addAll({'delivering': delivering});
+    result.addAll({'received': received});
     result.addAll({'from': from});
     result.addAll({'to': to});
     result.addAll({'items': items});
@@ -49,8 +61,12 @@ class ApplicantModel {
       company: map['company'] ?? '',
       companyId: map['companyId']?.toInt() ?? 0,
       dateDetails: map['dateDetails'].toDate(),
+      deliverDate: map['deliverDate'].toDate(),
+      receivedDate: map['receivedDate'].toDate(),
       date: map['date'] ?? '',
       delivered: map['delivered'] ?? false,
+      delivering: map['delivering'] ?? false,
+      received: map['received'] ?? false,
       from: map['from'] ?? '',
       to: map['to'] ?? '',
       items: List.from(map['items']),

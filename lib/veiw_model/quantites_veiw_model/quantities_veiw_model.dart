@@ -131,9 +131,11 @@ class QuantitiesVeiwModel extends GetxController {
     String dateTime = Jiffy(date).format('MM/dd/yyyy hh:mm:ss a');
     Random random = Random();
     int min = 10;
-    int max = 100000000000000000;
+    int max = 1000000000;
+    int min2 = 1000;
+    int max2 = 100000000;
 
-    int result = min + random.nextInt(max - min);
+    int result = min + random.nextInt(max - min) + random.nextInt(max2 - min2);
     await ref.doc().set({
       'id': result,
       "date": dateTime,
@@ -145,7 +147,11 @@ class QuantitiesVeiwModel extends GetxController {
       "delivered": false,
       "from": intailData,
       "to": intailData2,
-      "dateDetails": date
+      "dateDetails": date,
+      "deliverDate": DateTime.now(),
+      "receivedDate": DateTime.now(),
+      "delivering": false,
+      "received": false,
     });
     Get.back();
     Get.back();

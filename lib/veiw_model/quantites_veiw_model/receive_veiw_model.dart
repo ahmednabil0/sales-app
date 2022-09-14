@@ -13,12 +13,28 @@ class ReceiveVeiwModel extends GetxController {
         .where('salesId', isEqualTo: sharedpref!.getString('id'))
         .where('companyId', isEqualTo: sharedpref!.getInt('companyId'))
         .where('accept', isEqualTo: true)
+        .where('received', isEqualTo: false)
         .get()
         .then((value) {
       for (var i in value.docs) {
         dataList.add(ApplicantModel.fromMap(i));
       }
       update();
+    });
+  }
+
+  Future<void> updateDate(ApplicantModel model) async {
+    await ref
+        .where('id', isEqualTo: model.id)
+        .where('companyId', isEqualTo: sharedpref!.getInt('companyId'))
+        .where('salesId', isEqualTo: sharedpref!.getString('id'))
+        .get()
+        .then((value) {
+      ref.doc(value.docs[0].id).update({
+        'received': true,
+        'delivered': true,
+        'receivedDate': DateTime.now()
+      });
     });
   }
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:new_app/veiw/components/app_bar.dart';
 import 'package:new_app/veiw/components/back_ground.dart';
+import 'package:new_app/veiw/components/bttons.dart';
 import 'package:new_app/veiw/components/custom_text.dart';
 import 'package:new_app/veiw/components/spaces.dart';
 import 'package:new_app/veiw/helper/consts/colors.dart';
@@ -36,10 +38,28 @@ class ReceiveQuntityVeiw extends GetWidget<ReceiveVeiwModel> {
                           },
                           child: ListView.builder(
                             itemCount: controller.dataList.length,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: Get.width * 0.04,
+                              vertical: Get.width * 0.0,
+                            ),
                             itemBuilder: (BuildContext context, int index) {
                               return Container(
-                                height: Get.width,
-                                color: AppColors.primaryColor,
+                                margin: EdgeInsets.only(
+                                  bottom: Get.width * 0.04,
+                                ),
+                                height: Get.width * 0.8,
+                                decoration: BoxDecoration(
+                                    color: AppColors.backgroundColor,
+                                    borderRadius: BorderRadius.circular(
+                                      Get.width * 0.06,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          blurRadius: 10,
+                                          color: AppColors.fontColor
+                                              .withOpacity(0.5),
+                                          offset: const Offset(4, 4))
+                                    ]),
                                 child: Column(
                                   children: [
                                     AppText(
@@ -48,21 +68,21 @@ class ReceiveQuntityVeiw extends GetWidget<ReceiveVeiwModel> {
                                       ).fromNow()}',
                                       size: Get.width * 0.045,
                                       fw: FontWeight.bold,
-                                      color: AppColors.backgroundColor,
+                                      color: AppColors.fontColor,
                                     ),
                                     AppText(
                                       txt:
                                           '${'70'.tr}   ${controller.dataList[index].from}',
                                       size: Get.width * 0.045,
                                       fw: FontWeight.bold,
-                                      color: AppColors.backgroundColor,
+                                      color: AppColors.fontColor,
                                     ),
                                     AppText(
                                       txt:
                                           '${'71'.tr}   ${controller.dataList[index].to}',
                                       size: Get.width * 0.045,
                                       fw: FontWeight.bold,
-                                      color: AppColors.backgroundColor,
+                                      color: AppColors.fontColor,
                                     ),
                                     buildHeightSpace(0.02),
                                     AppText(
@@ -70,11 +90,27 @@ class ReceiveQuntityVeiw extends GetWidget<ReceiveVeiwModel> {
                                           '${'48'.tr} : ${controller.dataList[index].company}',
                                       size: Get.width * 0.045,
                                       fw: FontWeight.bold,
-                                      color: AppColors.backgroundColor,
+                                      color: AppColors.fontColor,
                                     ),
+                                    const Spacer(),
                                     Container(
-                                      color: Colors.red,
                                       height: Get.width * 0.24,
+                                      width: Get.width * 0.9,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.seconrayColor,
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(
+                                            Get.width * 0.06,
+                                          ),
+                                          topRight: Radius.circular(
+                                            Get.width * 0.06,
+                                          ),
+                                        ),
+                                        border: Border.all(
+                                          width: 1,
+                                          color: AppColors.primaryColor,
+                                        ),
+                                      ),
                                       child: ListView.builder(
                                         itemCount: controller
                                             .dataList[index].items.length,
@@ -91,7 +127,39 @@ class ReceiveQuntityVeiw extends GetWidget<ReceiveVeiwModel> {
                                           );
                                         },
                                       ),
-                                    )
+                                    ),
+                                    controller.dataList[index].delivering
+                                        ? CustomButton22(
+                                            ontap: () {
+                                              Get.defaultDialog(
+                                                title: '',
+                                                content: Column(
+                                                  children: [
+                                                    SvgPicture.asset(
+                                                      'assets/svg/rent.svg',
+                                                      height: Get.width * 0.4,
+                                                    ),
+                                                    buildHeightSpace(0.04),
+                                                    AppText(
+                                                      txt:
+                                                          '${'74'.tr}  ${Jiffy(controller.dataList[index].deliverDate).fromNow()} ',
+                                                      size: Get.width * 0.045,
+                                                      fw: FontWeight.bold,
+                                                      color: AppColors
+                                                          .primaryColor,
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                            txt: '73'.tr)
+                                        : const SizedBox(),
+                                    CustomButton9(
+                                        ontap: () {
+                                          controller.updateDate(
+                                              controller.dataList[index]);
+                                        },
+                                        txt: '72'.tr)
                                   ],
                                 ),
                               );
