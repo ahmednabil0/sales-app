@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/models/home_card_model.dart';
-import 'package:new_app/veiw/sceans/home/dailyes/daily_veiw.dart';
-import 'package:new_app/veiw/sceans/home/invoice/invoice.dart';
-import 'package:new_app/veiw/sceans/home/quntities_convert/appliacnt_quntity_veiw.dart';
-import 'package:new_app/veiw/sceans/home/rent_invoices/rent_invoice_veiw.dart';
-import 'package:new_app/veiw/sceans/home/returns-invoices/return_invoice_veiw.dart';
-import 'package:new_app/veiw/sceans/home/quntities_convert/receive_quntity_veiw.dart';
+import '../../models/home_card_model.dart';
+import '../../veiw/sceans/home/dailyes/daily_veiw.dart';
+import '../../veiw/sceans/home/invoice/invoice.dart';
+import '../../veiw/sceans/home/quntities_convert/appliacnt_quntity_veiw.dart';
+import '../../veiw/sceans/home/rent_invoices/rent_invoice_veiw.dart';
+import '../../veiw/sceans/home/returns-invoices/return_invoice_veiw.dart';
+import '../../veiw/sceans/home/quntities_convert/receive_quntity_veiw.dart';
 
 class Homedata {
   static List<HomeCardModel> homeList = [

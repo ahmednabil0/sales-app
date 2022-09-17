@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/bttons.dart';
-import 'package:new_app/veiw/components/custom_text.dart';
-import 'package:new_app/veiw/components/spaces.dart';
-import 'package:new_app/veiw/helper/consts/colors.dart';
-import 'package:new_app/veiw_model/rent_invoices/rent_invoice_veiw_model.dart';
+
+import '../../../veiw_model/rent_invoices/rent_invoice_veiw_model.dart';
+import '../../helper/consts/colors.dart';
+import '../bttons.dart';
+import '../custom_text.dart';
+import '../spaces.dart';
 
 // GetBuilder<EditViewModel> buildEditinvoiceCard() {
 //   return GetBuilder<EditViewModel>(

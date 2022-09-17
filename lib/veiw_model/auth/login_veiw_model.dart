@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:new_app/main.dart';
-import 'package:new_app/veiw/sceans/home/home_veiw.dart';
-import 'package:new_app/veiw_model/functions/ckeck_internet.dart';
+
+import '../../main.dart';
+import '../../veiw/sceans/home/home_veiw.dart';
+import '../functions/ckeck_internet.dart';
 
 class LoginVeiwModel extends GetxController {
   bool opscur = true;

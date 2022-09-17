@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/back_ground.dart';
-import 'package:new_app/veiw/components/custom_text.dart';
-import 'package:new_app/veiw/sceans/home/home_veiw.dart';
+import '../../../components/back_ground.dart';
+import '../../../components/custom_text.dart';
+import '../home_veiw.dart';
 
 class CompletedScrean extends StatefulWidget {
   const CompletedScrean({super.key});

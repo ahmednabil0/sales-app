@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/back_ground.dart';
-import 'package:new_app/veiw/components/bttons.dart';
-import 'package:new_app/veiw/components/custom_text.dart';
-import 'package:new_app/veiw/components/txt_frm_feilds/txt_forms.dart';
-import 'package:new_app/veiw/helper/consts/colors.dart';
-import 'package:new_app/veiw_model/auth/login_veiw_model.dart';
-import 'package:new_app/veiw_model/localization/local_veiw_model.dart';
+import '../../components/back_ground.dart';
+import '../../components/bttons.dart';
+import '../../components/custom_text.dart';
+import '../../components/txt_frm_feilds/txt_forms.dart';
+import '../../helper/consts/colors.dart';
+import '../../../veiw_model/auth/login_veiw_model.dart';
+import '../../../veiw_model/localization/local_veiw_model.dart';
 
 class SignVeiw extends GetWidget<LoginVeiwModel> {
   SignVeiw({super.key});

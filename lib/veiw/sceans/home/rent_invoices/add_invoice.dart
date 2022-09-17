@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/app_bar.dart';
-import 'package:new_app/veiw/components/back_ground.dart';
-import 'package:new_app/veiw/components/invoice_component/edit_invoice_card.dart';
+import '../../../components/app_bar.dart';
+import '../../../components/back_ground.dart';
+import '../../../components/invoice_component/edit_invoice_card.dart';
 
 class AddInvoiceRent extends StatelessWidget {
   const AddInvoiceRent({super.key});

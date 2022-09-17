@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:new_app/main.dart';
-import 'package:new_app/models/customer_model.dart';
-import 'package:new_app/models/online_invoice_model.dart';
-import 'package:new_app/models/rents_model.dart';
-import 'package:new_app/veiw/helper/consts/colors.dart';
-import 'package:new_app/veiw_model/sql_db/sqlflite.dart';
+import '../../main.dart';
+import '../../models/customer_model.dart';
+import '../../models/online_invoice_model.dart';
+import '../../models/rents_model.dart';
+import '../../veiw/helper/consts/colors.dart';
+import '../sql_db/sqlflite.dart';
 
 class RentInvoiceViewModel extends GetxController {
   final TextEditingController dateCont = TextEditingController();

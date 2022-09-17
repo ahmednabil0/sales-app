@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/helper/consts/colors.dart';
+
+import '../consts/colors.dart';
 
 ThemeData getThemeDate() {
   return ThemeData(

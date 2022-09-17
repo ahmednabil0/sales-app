@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/app_bar.dart';
-import 'package:new_app/veiw/components/back_ground.dart';
-import 'package:new_app/veiw/components/invoice_component/get_items.dart';
-import 'package:new_app/veiw/components/invoice_component/item_header.dart';
-import 'package:new_app/veiw_model/quantites_veiw_model/quantities_veiw_model.dart';
+import '../../../components/app_bar.dart';
+import '../../../components/back_ground.dart';
+import '../../../components/invoice_component/get_items.dart';
+import '../../../components/invoice_component/item_header.dart';
+import '../../../../veiw_model/quantites_veiw_model/quantities_veiw_model.dart';
 
 class AddItemToBr extends GetWidget<QuantitiesVeiwModel> {
   AddItemToBr({super.key});

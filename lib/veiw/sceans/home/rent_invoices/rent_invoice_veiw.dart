@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/app_bar.dart';
-import 'package:new_app/veiw/components/back_ground.dart';
-import 'package:new_app/veiw/components/bttons.dart';
-import 'package:new_app/veiw/components/custom_text.dart';
-import 'package:new_app/veiw/components/invoice_component/drob_down.dart';
-import 'package:new_app/veiw/components/spaces.dart';
-import 'package:new_app/veiw/helper/consts/colors.dart';
-import 'package:new_app/veiw/sceans/home/rent_invoices/add_invoice.dart';
-import 'package:new_app/veiw_model/rent_invoices/rent_invoice_veiw_model.dart';
+
+import '../../../../veiw_model/rent_invoices/rent_invoice_veiw_model.dart';
+import '../../../components/app_bar.dart';
+import '../../../components/back_ground.dart';
+import '../../../components/bttons.dart';
+import '../../../components/custom_text.dart';
+import '../../../components/invoice_component/drob_down.dart';
+import '../../../components/spaces.dart';
+import '../../../helper/consts/colors.dart';
+import 'add_invoice.dart';
 
 class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
   RentInvoiceVeiw({super.key});

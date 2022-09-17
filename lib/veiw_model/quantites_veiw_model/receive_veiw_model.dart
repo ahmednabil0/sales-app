@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:new_app/main.dart';
-import 'package:new_app/models/applicant_model.dart';
+import '../../main.dart';
+import '../../models/applicant_model.dart';
 
 class ReceiveVeiwModel extends GetxController {
   CollectionReference ref = FirebaseFirestore.instance.collection('applicants');

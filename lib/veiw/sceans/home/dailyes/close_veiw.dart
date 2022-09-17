@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/app_bar.dart';
-import 'package:new_app/veiw/components/back_ground.dart';
-import 'package:new_app/veiw/components/bttons.dart';
-import 'package:new_app/veiw/components/custom_text.dart';
-import 'package:new_app/veiw/components/spaces.dart';
-import 'package:new_app/veiw/helper/consts/colors.dart';
-import 'package:new_app/veiw_model/dailyes/daily_veiw_model.dart';
+import '../../../components/app_bar.dart';
+import '../../../components/back_ground.dart';
+import '../../../components/bttons.dart';
+import '../../../components/custom_text.dart';
+import '../../../components/spaces.dart';
+import '../../../helper/consts/colors.dart';
+import '../../../../veiw_model/dailyes/daily_veiw_model.dart';
 
 class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
   CloseDailyVeiw({super.key});

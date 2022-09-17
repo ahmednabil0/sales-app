@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/custom_text.dart';
-import 'package:new_app/veiw/helper/consts/colors.dart';
-import 'package:new_app/veiw_model/invoces/create_invoice_veiw_model.dart';
+
+import '../../../veiw_model/invoces/create_invoice_veiw_model.dart';
+import '../../helper/consts/colors.dart';
+import '../custom_text.dart';
 
 class TxtFrmFeild {
   static SizedBox buildUserTxtForm(

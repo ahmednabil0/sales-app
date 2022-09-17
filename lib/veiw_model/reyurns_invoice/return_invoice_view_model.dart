@@ -2,15 +2,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:new_app/main.dart';
-import 'package:new_app/models/customer_model.dart';
-import 'package:new_app/models/firebase_reurn_model.dart';
-import 'package:new_app/models/item_sql_model.dart';
-import 'package:new_app/models/items_model.dart';
-import 'package:new_app/models/return.dart';
-import 'package:new_app/veiw/sceans/home/invoice/completed_veiw.dart';
-import 'package:new_app/veiw_model/functions/ckeck_internet.dart';
-import 'package:new_app/veiw_model/sql_db/sqlflite.dart';
+
+import '../../main.dart';
+import '../../models/customer_model.dart';
+import '../../models/firebase_reurn_model.dart';
+import '../../models/item_sql_model.dart';
+import '../../models/items_model.dart';
+import '../../models/return.dart';
+import '../../veiw/sceans/home/invoice/completed_veiw.dart';
+import '../functions/ckeck_internet.dart';
+import '../sql_db/sqlflite.dart';
 
 class ReturnIvoiceVeiwModel extends GetxController {
   TextEditingController vatCont = TextEditingController();

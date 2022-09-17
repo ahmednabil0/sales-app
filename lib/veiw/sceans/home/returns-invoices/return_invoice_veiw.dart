@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/app_bar.dart';
-import 'package:new_app/veiw/components/back_ground.dart';
-import 'package:new_app/veiw/components/bttons.dart';
-import 'package:new_app/veiw/sceans/home/returns-invoices/create_return_veiw.dart';
-import 'package:new_app/veiw_model/reyurns_invoice/return_invoice_view_model.dart';
+import '../../../components/app_bar.dart';
+import '../../../components/back_ground.dart';
+import '../../../components/bttons.dart';
+import 'create_return_veiw.dart';
+import '../../../../veiw_model/reyurns_invoice/return_invoice_view_model.dart';
 
 class ReturnInvoiceVeiw extends GetWidget<ReturnIvoiceVeiwModel> {
   ReturnInvoiceVeiw({super.key});

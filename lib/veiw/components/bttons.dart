@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/custom_text.dart';
-import 'package:new_app/veiw/helper/consts/colors.dart';
+
+import '../helper/consts/colors.dart';
+import 'custom_text.dart';
 
 // ignore: must_be_immutable
 class CustomButton extends StatelessWidget {

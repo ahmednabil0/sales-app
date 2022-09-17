@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/app_bar.dart';
-import 'package:new_app/veiw/components/back_ground.dart';
-import 'package:new_app/veiw/components/bttons.dart';
-import 'package:new_app/veiw/components/invoice_component/drob_down.dart';
-import 'package:new_app/veiw/components/invoice_component/invoice_module.dart';
-import 'package:new_app/veiw/components/invoice_component/summery_invoice.dart';
-import 'package:new_app/veiw/components/spaces.dart';
-import 'package:new_app/veiw/components/txt_frm_feilds/txt_forms.dart';
-import 'package:new_app/veiw/sceans/home/returns-invoices/add_items.dart';
-import 'package:new_app/veiw_model/reyurns_invoice/return_invoice_view_model.dart';
+
+import '../../../../veiw_model/reyurns_invoice/return_invoice_view_model.dart';
+import '../../../components/app_bar.dart';
+import '../../../components/back_ground.dart';
+import '../../../components/bttons.dart';
+import '../../../components/invoice_component/drob_down.dart';
+import '../../../components/invoice_component/invoice_module.dart';
+import '../../../components/invoice_component/summery_invoice.dart';
+import '../../../components/spaces.dart';
+import '../../../components/txt_frm_feilds/txt_forms.dart';
+import 'add_items.dart';
 
 class CreateReturnsVeiw extends GetWidget<ReturnIvoiceVeiwModel> {
   CreateReturnsVeiw({super.key});

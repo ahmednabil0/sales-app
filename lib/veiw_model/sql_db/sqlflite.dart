@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'package:new_app/models/customer_model.dart';
-import 'package:new_app/models/invoice_model.dart';
-import 'package:new_app/models/item_sql_model.dart';
-import 'package:new_app/models/items_model.dart';
-import 'package:new_app/models/rents_model.dart';
-import 'package:new_app/models/return.dart';
+import '../../models/customer_model.dart';
+import '../../models/invoice_model.dart';
+import '../../models/item_sql_model.dart';
+import '../../models/items_model.dart';
+import '../../models/rents_model.dart';
+import '../../models/return.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';

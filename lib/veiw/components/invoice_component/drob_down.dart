@@ -1,12 +1,13 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/custom_text.dart';
-import 'package:new_app/veiw/helper/consts/colors.dart';
-import 'package:new_app/veiw_model/invoces/create_invoice_veiw_model.dart';
-import 'package:new_app/veiw_model/quantites_veiw_model/quantities_veiw_model.dart';
-import 'package:new_app/veiw_model/rent_invoices/rent_invoice_veiw_model.dart';
-import 'package:new_app/veiw_model/reyurns_invoice/return_invoice_view_model.dart';
+
+import '../../../veiw_model/invoces/create_invoice_veiw_model.dart';
+import '../../../veiw_model/quantites_veiw_model/quantities_veiw_model.dart';
+import '../../../veiw_model/rent_invoices/rent_invoice_veiw_model.dart';
+import '../../../veiw_model/reyurns_invoice/return_invoice_view_model.dart';
+import '../../helper/consts/colors.dart';
+import '../custom_text.dart';
 
 SizedBox buildDrobDown({required InvoiceVeiwModel controller}) {
   return SizedBox(

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/bttons.dart';
-import 'package:new_app/veiw/components/custom_text.dart';
-import 'package:new_app/veiw/components/invoice_component/item_header.dart';
-import 'package:new_app/veiw/components/txt_frm_feilds/txt_forms.dart';
-import 'package:new_app/veiw/helper/consts/colors.dart';
-import 'package:new_app/veiw_model/invoces/create_invoice_veiw_model.dart';
-import 'package:new_app/veiw_model/quantites_veiw_model/quantities_veiw_model.dart';
-import 'package:new_app/veiw_model/reyurns_invoice/return_invoice_view_model.dart';
+import '../bttons.dart';
+import '../custom_text.dart';
+import 'item_header.dart';
+import '../txt_frm_feilds/txt_forms.dart';
+import '../../helper/consts/colors.dart';
+import '../../../veiw_model/invoces/create_invoice_veiw_model.dart';
+import '../../../veiw_model/quantites_veiw_model/quantities_veiw_model.dart';
+import '../../../veiw_model/reyurns_invoice/return_invoice_view_model.dart';
 
 GetBuilder<InvoiceVeiwModel> buildGetItems() {
   return GetBuilder<InvoiceVeiwModel>(

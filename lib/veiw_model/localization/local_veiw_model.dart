@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/main.dart';
-import 'package:new_app/veiw/components/bttons.dart';
-import 'package:new_app/veiw/components/custom_text.dart';
-import 'package:new_app/veiw/helper/consts/colors.dart';
+
+import '../../main.dart';
+import '../../veiw/components/bttons.dart';
+import '../../veiw/components/custom_text.dart';
+import '../../veiw/helper/consts/colors.dart';
 
 class MyLocalController extends GetxController {
   Locale intaillocal = sharedpref!.getString('lang') == 'en'

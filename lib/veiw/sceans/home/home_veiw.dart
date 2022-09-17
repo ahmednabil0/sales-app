@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/components/back_ground.dart';
-import 'package:new_app/veiw/components/custom_text.dart';
-import 'package:new_app/veiw/helper/consts/colors.dart';
-import 'package:new_app/veiw_model/data/home_data.dart';
+import '../../components/back_ground.dart';
+import '../../components/custom_text.dart';
+import '../../helper/consts/colors.dart';
+import '../../../veiw_model/data/home_data.dart';
 
 // ignore: must_be_immutable
 class HomeVeiw extends StatelessWidget {
