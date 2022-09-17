@@ -1,12 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:new_app/veiw/helper/theme/theme.dart';
-import 'package:new_app/veiw/sceans/auth/sign_veiw.dart';
-import 'package:new_app/veiw/sceans/home/home_veiw.dart';
-import 'package:new_app/veiw_model/localization/local.dart';
-import 'package:new_app/veiw_model/localization/local_veiw_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'veiw/helper/theme/theme.dart';
+import 'veiw/sceans/auth/sign_veiw.dart';
+import 'veiw/sceans/home/home_veiw.dart';
+import 'veiw_model/localization/local.dart';
+import 'veiw_model/localization/local_veiw_model.dart';
 
 SharedPreferences? sharedpref;
 
