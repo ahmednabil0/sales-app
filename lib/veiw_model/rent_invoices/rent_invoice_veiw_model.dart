@@ -25,7 +25,11 @@ class RentInvoiceViewModel extends GetxController {
     List myList = await db.getAllCustomers();
 
     if (myList.isEmpty) {
-      await customersRef.get().then((value) async {
+      await customersRef
+          .where('companyName', isEqualTo: sharedpref!.getString('company'))
+          .where('companyId', isEqualTo: sharedpref!.getInt('companyId'))
+          .get()
+          .then((value) async {
         for (var i in value.docs) {
           await db.addCustomers(CustomerModel.fromMap(i));
         }
@@ -121,6 +125,7 @@ class RentInvoiceViewModel extends GetxController {
     await invoicesRef
         .where('salesId', isEqualTo: sharedpref!.getString('id'))
         .where('company', isEqualTo: sharedpref!.getString('company'))
+        // .where('companyId', isEqualTo: sharedpref!.getInt('companyId'))
         .where('customerName', isEqualTo: name)
         .where('date', isEqualTo: date)
         .get()
@@ -163,7 +168,8 @@ class RentInvoiceViewModel extends GetxController {
       await invoicesRef
           .where('id', isEqualTo: model.id)
           .where('salesId', isEqualTo: model.salesId)
-          .where('company', isEqualTo: model.company)
+          .where('company', isEqualTo: sharedpref!.getString('company'))
+          // .where('companyId', isEqualTo: sharedpref!.getInt('companyId'))
           .where('customerName', isEqualTo: model.customerName)
           .where('date', isEqualTo: model.date)
           .get()

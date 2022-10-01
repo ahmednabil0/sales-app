@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/main.dart';
 import '../../components/back_ground.dart';
 import '../../components/custom_text.dart';
 import '../../helper/consts/colors.dart';
@@ -33,7 +34,7 @@ class HomeVeiw extends StatelessWidget {
               children: [
                 AppTextWidgtt(
                   txt: '10'.tr,
-                  txt2: 'customer name',
+                  txt2: admin ?? sharedpref!.getString('name')!,
                   size: Get.width * 0.04,
                   fw: FontWeight.bold,
                   color: AppColors.primaryColor.withOpacity(0.69),

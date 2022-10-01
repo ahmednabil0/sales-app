@@ -26,7 +26,11 @@ class ReturnIvoiceVeiwModel extends GetxController {
     List myList = await db.getAllCustomers();
 
     if (myList.isEmpty) {
-      await customersRef.get().then((value) async {
+      await customersRef
+          .where('companyName', isEqualTo: sharedpref!.getString('company'))
+          .where('companyId', isEqualTo: sharedpref!.getInt('companyId'))
+          .get()
+          .then((value) async {
         for (var i in value.docs) {
           await db.addCustomers(CustomerModel.fromMap(i));
         }
@@ -83,10 +87,8 @@ class ReturnIvoiceVeiwModel extends GetxController {
     List myList = await db.getAllItem();
     if (myList.isEmpty) {
       await itemsRef
-          .where(
-            'companyName',
-            isEqualTo: sharedpref!.getString('company'),
-          )
+          .where('companyName', isEqualTo: sharedpref!.getString('company'))
+          .where('companyId', isEqualTo: sharedpref!.getInt('companyId'))
           .get()
           .then((value) async {
         for (var i in value.docs) {

@@ -11,6 +11,7 @@ class ReceiveVeiwModel extends GetxController {
     dataList.clear();
     await ref
         .where('salesId', isEqualTo: sharedpref!.getString('id'))
+        .where('companyName', isEqualTo: sharedpref!.getString('company'))
         .where('companyId', isEqualTo: sharedpref!.getInt('companyId'))
         .where('accept', isEqualTo: true)
         .where('received', isEqualTo: false)
@@ -26,6 +27,7 @@ class ReceiveVeiwModel extends GetxController {
   Future<void> updateDate(ApplicantModel model) async {
     await ref
         .where('id', isEqualTo: model.id)
+        .where('companyName', isEqualTo: sharedpref!.getString('company'))
         .where('companyId', isEqualTo: sharedpref!.getInt('companyId'))
         .where('salesId', isEqualTo: sharedpref!.getString('id'))
         .get()

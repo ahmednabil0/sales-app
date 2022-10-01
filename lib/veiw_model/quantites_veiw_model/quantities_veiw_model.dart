@@ -61,10 +61,8 @@ class QuantitiesVeiwModel extends GetxController {
     List myList = await db.getAllItem();
     if (myList.isEmpty) {
       await itemsRef
-          .where(
-            'companyName',
-            isEqualTo: sharedpref!.getString('company'),
-          )
+          .where('companyName', isEqualTo: sharedpref!.getString('company'))
+          .where('companyId', isEqualTo: sharedpref!.getInt('companyId'))
           .get()
           .then((value) async {
         for (var i in value.docs) {
