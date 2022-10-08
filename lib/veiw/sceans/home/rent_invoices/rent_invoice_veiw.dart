@@ -71,6 +71,8 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                                             Get.width * 0.07),
                                       ),
                                       child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Row(
                                             mainAxisAlignment:
@@ -102,7 +104,7 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                                             children: [
                                               AppText(
                                                 txt: '42'.tr,
-                                                size: Get.width * 0.035,
+                                                size: Get.width * 0.03,
                                                 fw: FontWeight.w800,
                                                 color: AppColors.primaryColor,
                                               ),
@@ -110,13 +112,13 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                                                 txt: controller
                                                     .confirmInvoiceList[0]
                                                     .customerName,
-                                                size: Get.width * 0.035,
+                                                size: Get.width * 0.03,
                                                 fw: FontWeight.w800,
                                                 color: Colors.red,
                                               ),
                                               AppText(
                                                 txt: '48'.tr,
-                                                size: Get.width * 0.035,
+                                                size: Get.width * 0.03,
                                                 fw: FontWeight.w800,
                                                 color: AppColors.primaryColor,
                                               ),
@@ -124,7 +126,7 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                                                 txt: controller
                                                     .confirmInvoiceList[0]
                                                     .company,
-                                                size: Get.width * 0.035,
+                                                size: Get.width * 0.03,
                                                 fw: FontWeight.w800,
                                                 color: Colors.red,
                                               ),
@@ -136,20 +138,20 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                                             children: [
                                               AppText(
                                                 txt: '43'.tr,
-                                                size: Get.width * 0.035,
+                                                size: Get.width * 0.03,
                                                 fw: FontWeight.w800,
                                                 color: AppColors.primaryColor,
                                               ),
                                               AppText(
                                                 txt: controller
                                                     .confirmInvoiceList[0].date,
-                                                size: Get.width * 0.035,
+                                                size: Get.width * 0.03,
                                                 fw: FontWeight.w800,
                                                 color: Colors.red,
                                               ),
                                               AppText(
                                                 txt: '49'.tr,
-                                                size: Get.width * 0.035,
+                                                size: Get.width * 0.03,
                                                 fw: FontWeight.w800,
                                                 color: AppColors.primaryColor,
                                               ),
@@ -157,7 +159,7 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                                                 txt: controller
                                                     .confirmInvoiceList[0]
                                                     .dueDate,
-                                                size: Get.width * 0.035,
+                                                size: Get.width * 0.03,
                                                 fw: FontWeight.w800,
                                                 color: Colors.red,
                                               ),
@@ -169,7 +171,7 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                                             children: [
                                               AppText(
                                                 txt: '44'.tr,
-                                                size: Get.width * 0.035,
+                                                size: Get.width * 0.03,
                                                 fw: FontWeight.w800,
                                                 color: AppColors.primaryColor,
                                               ),
@@ -177,13 +179,13 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                                                 txt: controller
                                                     .confirmInvoiceList[0].total
                                                     .toStringAsFixed(2),
-                                                size: Get.width * 0.035,
+                                                size: Get.width * 0.03,
                                                 fw: FontWeight.w800,
                                                 color: Colors.red,
                                               ),
                                               AppText(
                                                 txt: '50'.tr,
-                                                size: Get.width * 0.035,
+                                                size: Get.width * 0.03,
                                                 fw: FontWeight.w800,
                                                 color: AppColors.primaryColor,
                                               ),
@@ -191,7 +193,7 @@ class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
                                                 txt: controller
                                                     .confirmInvoiceList[0].payed
                                                     .toStringAsFixed(2),
-                                                size: Get.width * 0.035,
+                                                size: Get.width * 0.03,
                                                 fw: FontWeight.w800,
                                                 color: Colors.red,
                                               ),

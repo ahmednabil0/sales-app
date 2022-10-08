@@ -141,6 +141,7 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                         borderRadius: BorderRadius.circular(Get.width * 0.07),
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -173,25 +174,25 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                             children: [
                               AppText(
                                 txt: '42'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.returnsList[index].customer,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
                               AppText(
                                 txt: '48'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.returnsList[index].company,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
@@ -202,26 +203,26 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                             children: [
                               AppText(
                                 txt: '67'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.returnsList[index].date,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
                               AppText(
                                 txt: '50'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.returnsList[index].total
                                     .toStringAsFixed(2),
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
@@ -232,7 +233,7 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                             children: [
                               AppText(
                                 txt: '33'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
@@ -240,7 +241,7 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                               AppText(
                                 txt: controller.returnsList[index].vat
                                     .toStringAsFixed(2),
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
@@ -286,6 +287,7 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                         borderRadius: BorderRadius.circular(Get.width * 0.07),
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -318,25 +320,25 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                             children: [
                               AppText(
                                 txt: '42'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.rentsList[index].customer,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
                               AppText(
                                 txt: '48'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.rentsList[index].company,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
@@ -347,25 +349,25 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                             children: [
                               AppText(
                                 txt: '67'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.rentsList[index].date,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
                               AppText(
                                 txt: '43'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.rentsList[index].invoiceDate,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
@@ -376,27 +378,27 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                             children: [
                               AppText(
                                 txt: '50'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.rentsList[index].payed
                                     .toStringAsFixed(2),
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
                               AppText(
                                 txt: '68'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.rentsList[index].totalPayed
                                     .toStringAsFixed(2),
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
@@ -439,9 +441,10 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                       decoration: BoxDecoration(
                         border:
                             Border.all(width: 2, color: AppColors.primaryColor),
-                        borderRadius: BorderRadius.circular(Get.width * 0.07),
+                        borderRadius: BorderRadius.circular(Get.width * 0.04),
                       ),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -494,25 +497,25 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                             children: [
                               AppText(
                                 txt: '42'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.invoiceList[index].customerName,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
                               AppText(
                                 txt: '48'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.invoiceList[index].company,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
@@ -523,25 +526,25 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                             children: [
                               AppText(
                                 txt: '43'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.invoiceList[index].date,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
                               AppText(
                                 txt: '49'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.invoiceList[index].dueDate,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
@@ -552,27 +555,27 @@ class CloseDailyVeiw extends GetWidget<DailyVeiwModel> {
                             children: [
                               AppText(
                                 txt: '44'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.invoiceList[index].total
                                     .toString(),
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
                               AppText(
                                 txt: '50'.tr,
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: AppColors.primaryColor,
                               ),
                               AppText(
                                 txt: controller.invoiceList[index].payed
                                     .toStringAsFixed(2),
-                                size: Get.width * 0.035,
+                                size: Get.width * 0.03,
                                 fw: FontWeight.w800,
                                 color: Colors.red,
                               ),
