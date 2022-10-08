@@ -34,9 +34,9 @@ class LoginVeiwModel extends GetxController {
           sharedpref!.setString('name', value.docs[0]['name']);
           sharedpref!.setString('company', value.docs[0]['companyName']);
           sharedpref!.setInt('companyId', value.docs[0]['companyId']);
-          print(value.docs[0]['id']);
-          print(value.docs[0]['companyName']);
-          print(value.docs[0]['companyId']);
+          // print(value.docs[0]['id']);
+          // print(value.docs[0]['companyName']);
+          // print(value.docs[0]['companyId']);
         });
 
         Get.snackbar('Ok', 'sucess Sign in');
