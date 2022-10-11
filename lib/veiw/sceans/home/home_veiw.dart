@@ -69,8 +69,8 @@ class HomeVeiw extends StatelessWidget {
                                   BoxShadow(
                                       blurRadius: 5,
                                       color:
-                                          AppColors.fontColor.withOpacity(0.5),
-                                      offset: const Offset(5, 5))
+                                          AppColors.fontColor.withOpacity(0.3),
+                                      offset: const Offset(3, 3))
                                 ]),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,

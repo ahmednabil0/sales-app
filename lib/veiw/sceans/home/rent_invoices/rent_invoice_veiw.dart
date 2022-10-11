@@ -14,6 +14,7 @@ import 'add_invoice.dart';
 
 class RentInvoiceVeiw extends GetWidget<RentInvoiceViewModel> {
   RentInvoiceVeiw({super.key});
+
   @override
   final controller = Get.put(RentInvoiceViewModel());
   final GlobalKey<FormState> _key = GlobalKey<FormState>();

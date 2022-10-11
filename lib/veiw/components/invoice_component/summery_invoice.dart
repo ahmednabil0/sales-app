@@ -45,13 +45,13 @@ GetBuilder<InvoiceVeiwModel> buildSummeryinvoice() {
                   children: [
                     AppText(
                       txt: '${'33'.tr} : ',
-                      size: Get.width * 0.04,
+                      size: Get.width * 0.03,
                       fw: FontWeight.bold,
                       color: AppColors.fontColor,
                     ),
                     AppText(
                       txt: controller.vatCont.text,
-                      size: Get.width * 0.04,
+                      size: Get.width * 0.03,
                       fw: FontWeight.bold,
                       color: AppColors.fontColor,
                     ),
@@ -62,13 +62,13 @@ GetBuilder<InvoiceVeiwModel> buildSummeryinvoice() {
                   children: [
                     AppText(
                       txt: '${'35'.tr} : ',
-                      size: Get.width * 0.04,
+                      size: Get.width * 0.03,
                       fw: FontWeight.bold,
                       color: AppColors.fontColor,
                     ),
                     AppText(
                       txt: controller.deliveryCont.text,
-                      size: Get.width * 0.04,
+                      size: Get.width * 0.03,
                       fw: FontWeight.bold,
                       color: AppColors.fontColor,
                     ),
@@ -79,13 +79,13 @@ GetBuilder<InvoiceVeiwModel> buildSummeryinvoice() {
                   children: [
                     AppText(
                       txt: '${'34'.tr} : ',
-                      size: Get.width * 0.04,
+                      size: Get.width * 0.03,
                       fw: FontWeight.bold,
                       color: AppColors.fontColor,
                     ),
                     AppText(
                       txt: controller.total.toString(),
-                      size: Get.width * 0.04,
+                      size: Get.width * 0.03,
                       fw: FontWeight.bold,
                       color: AppColors.fontColor,
                     ),

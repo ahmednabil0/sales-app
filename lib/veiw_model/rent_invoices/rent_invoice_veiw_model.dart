@@ -15,12 +15,14 @@ class RentInvoiceViewModel extends GetxController {
   final TextEditingController rentCont = TextEditingController();
   final TextEditingController willPayCont = TextEditingController();
   CollectionReference rentRef = FirebaseFirestore.instance.collection('rents');
+
   //=========================================\\
   MyDataBase db = MyDataBase();
   List<CustomerModel> mylist = [];
   List<String> afterList = [];
   CollectionReference customersRef =
       FirebaseFirestore.instance.collection('customers');
+
   Future<void> getCustomersDate() async {
     List myList = await db.getAllCustomers();
 
@@ -54,10 +56,12 @@ class RentInvoiceViewModel extends GetxController {
   }
 
   String? intailData;
+
   oncganged(String? val) {
     intailData = val.toString();
     update();
   }
+
   //end
 
   //=========================================\\
@@ -121,6 +125,7 @@ class RentInvoiceViewModel extends GetxController {
   CollectionReference invoicesRef =
       FirebaseFirestore.instance.collection('invoices');
   List<FirebaseInvoiceModel> invoiceList = [];
+
   Future<void> getData(String date, String name) async {
     await invoicesRef
         .where('salesId', isEqualTo: sharedpref!.getString('id'))
@@ -144,6 +149,7 @@ class RentInvoiceViewModel extends GetxController {
   }
 
   List<FirebaseInvoiceModel> confirmInvoiceList = [];
+
   void addToList(FirebaseInvoiceModel model) {
     confirmInvoiceList.clear();
     confirmInvoiceList.add(model);
